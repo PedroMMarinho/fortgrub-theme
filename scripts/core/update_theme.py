@@ -19,3 +19,5 @@ def run():
     current_image = add_background(base_image, config)
 
     save_image(current_image, "test.png")
+
+    # TODO: Add icons entries with the info of entries.
