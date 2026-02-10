@@ -1,12 +1,13 @@
 import re
 import os
+import json
+from helpers.utils import THEME_CONFIG_PATH
+import shlex
 
 GRUB_CFG_PATH = '/boot/grub/grub.cfg'
 
-def parse_grub_cfg(cfg_path=GRUB_CFG_PATH):
-    """
-    Parses a grub.cfg file and returns a structured list of entries.
-    """
+
+def parse_grub_cfg(config, save_to_config = True, cfg_path=GRUB_CFG_PATH):
     if not os.path.exists(cfg_path):
         print(f"❌ Error: grub.cfg not found at {cfg_path}")
         return []
@@ -15,38 +16,56 @@ def parse_grub_cfg(cfg_path=GRUB_CFG_PATH):
         lines = f.readlines()
 
     entries = []
-    
     stack = [entries]
 
-    pattern = re.compile(r"^\s*(menuentry|submenu)\s+['\"]([^'\"]+)['\"](.*)\{")
-    
-    class_pattern = re.compile(r"--class\s+([\w-]+)")
-
     for line in lines:
-        line = line.strip()
+        clean_line = line.strip()
+        if not clean_line:
+            continue
+            
+        try:
+            tokens = shlex.split(clean_line, comments=True)
+        except ValueError:
+            continue
+            
+        if not tokens:
+            continue
 
-        match = pattern.search(line)
-        if match:
-            entry_type = match.group(1)  
-            entry_name = match.group(2)  
-            rest_of_line = match.group(3)
+        if tokens[0] == '}':
+            if len(stack) > 1:
+                stack.pop()
+            continue
 
-            classes = class_pattern.findall(rest_of_line)
+        if tokens[0] in ['menuentry', 'submenu']:
+            current_name = tokens[1]
+            entry_type = tokens[0]
+            
+            classes = []
+            for i, token in enumerate(tokens):
+                if token == '--class' and i + 1 < len(tokens):
+                    classes.append(tokens[i+1])
             
             new_entry = {
-                "name": entry_name,
+                "name": current_name,
                 "type": entry_type,
                 "class": classes,
-                "children": [] 
+                "children": []
             }
+            
+            if isinstance(stack[-1], list):
+                stack[-1].append(new_entry)
 
-            current_context = stack[-1]
-            current_context.append(new_entry)
-
-            if entry_type == 'submenu':
-                stack.append(new_entry['children'])
-        
-        elif line.startswith("}") and len(stack) > 1:
-            stack.pop()
+            if tokens[-1] == '{':
+                if entry_type == 'submenu':
+                    stack.append(new_entry['children'])
+                else:
+                    stack.append("IGNORE")
+    if save_to_config:
+        config['menu-entries'] = entries
+        with open(THEME_CONFIG_PATH, 'w') as f:
+            json.dump(config, f, indent=4)
 
     return entries
+
+
+    
