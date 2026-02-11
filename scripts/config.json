@@ -24,7 +24,8 @@
             "name": " Restore Ember",
             "type": "submenu",
             "class": [
-                "ember"
+                "ember",
+                "ubuntu"
             ],
             "children": [
                 {
@@ -37,25 +38,23 @@
                         "os"
                     ],
                     "children": []
-                },
-                {
-                    "name": "Arch Linux Fallback",
-                    "type": "menuentry",
-                    "class": [
-                        "arch",
-                        "gnu-linux",
-                        "gnu",
-                        "os"
-                    ],
-                    "children": []
                 }
+                
             ]
         },
         {
             "name": " Firelink Shrine",
             "type": "menuentry",
             "class": [
-                "bonefire"
+                "centos"
+            ],
+            "children": []
+        },
+        {
+            "name": " Firelink Shrine",
+            "type": "menuentry",
+            "class": [
+                "debian"
             ],
             "children": []
         }

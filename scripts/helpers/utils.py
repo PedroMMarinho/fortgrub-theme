@@ -10,6 +10,8 @@ SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS_DIR = os.path.join(PROJECT_ROOT, "assets")
 ICONS_DIR = os.path.join(ASSETS_DIR, "icons")
 BACKGROUNDS_DIR = os.path.join(ASSETS_DIR, "backgrounds")
+IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
+THEME_DIR = os.path.join(PROJECT_ROOT, "theme")
 
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")

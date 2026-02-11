@@ -60,6 +60,7 @@ def parse_grub_cfg(config, save_to_config = True, cfg_path=GRUB_CFG_PATH):
                     stack.append(new_entry['children'])
                 else:
                     stack.append("IGNORE")
+                    
     if save_to_config:
         config['menu-entries'] = entries
         with open(THEME_CONFIG_PATH, 'w') as f:
