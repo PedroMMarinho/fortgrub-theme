@@ -2,6 +2,7 @@
 import os
 import json
 import PIL.Image as Image
+from PIL import ImageFont
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -12,6 +13,7 @@ ICONS_DIR = os.path.join(ASSETS_DIR, "icons")
 BACKGROUNDS_DIR = os.path.join(ASSETS_DIR, "backgrounds")
 IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
 THEME_DIR = os.path.join(PROJECT_ROOT, "theme")
+FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
 
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")
@@ -44,3 +46,13 @@ def save_image(image, name ,output_path=SCRIPTS_DIR):
         print(f"✅ Saved image to {image_path}")
     except Exception as e:
         print(f"❌ Error: Failed to save image. {e}")
+
+def load_font(path, size):
+    if not os.path.exists(path):
+        print(f"❌ Error: Font not found at {path}")
+        return None
+    try:
+        return ImageFont.truetype(path, size)
+    except Exception as e:
+        print(f"❌ Error: Failed to load font. {e}")
+        return None

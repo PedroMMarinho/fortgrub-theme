@@ -1,7 +1,7 @@
 {
     "menu-entries": [
         {
-            "name": "Champion of Ash",
+            "name": "Arch",
             "type": "menuentry",
             "class": [
                 "arch",
@@ -12,49 +12,13 @@
             "children": []
         },
         {
-            "name": " Lord of Cinder",
+            "name": "Ubuntu",
             "type": "menuentry",
             "class": [
-                "windows",
+                "ubuntu",
+                "gnu-linux",
+                "gnu",
                 "os"
-            ],
-            "children": []
-        },
-        {
-            "name": " Restore Ember",
-            "type": "submenu",
-            "class": [
-                "ember",
-                "ubuntu"
-            ],
-            "children": [
-                {
-                    "name": "Arch kernel Linux",
-                    "type": "menuentry",
-                    "class": [
-                        "arch",
-                        "gnu-linux",
-                        "gnu",
-                        "os"
-                    ],
-                    "children": []
-                }
-                
-            ]
-        },
-        {
-            "name": " Firelink Shrine",
-            "type": "menuentry",
-            "class": [
-                "centos"
-            ],
-            "children": []
-        },
-        {
-            "name": " Firelink Shrine",
-            "type": "menuentry",
-            "class": [
-                "debian"
             ],
             "children": []
         }
