@@ -154,15 +154,100 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
 
     # Dashed Line
     line_start_pos = (reference_point[0] - 3, reference_point[1] + 24)
-    line_base_width = 147
+    line_base_width = 146
 
-
+    draw_dashed_line(
+        img, 
+        line_start_pos, 
+        line_base_width, 
+        font, 
+        entry_name, 
+        text_start[0]
+    )
 
     # Status Text
     status_text = "Ready" if slot_idx == 0 else "Not Ready" 
     status_color = "#64bc47" if slot_idx == 0 else "#ff737e"
     
+def draw_dashed_line(img, start_pos, min_width, font, text, text_start_x):
+    text_width = font.getlength(text)
     
+    line_start_x = start_pos[0]
+    
+    text_end_absolute = text_start_x + text_width
+    
+    required_width_for_text = (text_end_absolute - line_start_x)
+    
+    target_width = max(min_width, required_width_for_text)
+
+    full_segment = create_detailed_segment()
+    
+    end_cap = full_segment.crop((0, 0, 2, 4))
+
+    current_x, start_y = start_pos
+    
+    step = 8
+    
+    drawn_width = 0
+    
+    while drawn_width < (target_width - 2):
+        img.paste(full_segment, (int(current_x), int(start_y)), full_segment)
+        current_x += step
+        drawn_width += step
+
+
+    img.paste(end_cap, (int(current_x), int(start_y)), end_cap)
+
+
+def create_detailed_segment(color=(255, 255, 255)):
+    # 1. Dimensions
+    core_w, core_h = 3, 2
+    border = 1
+    total_w = core_w + (border * 2)  # 5 px
+    total_h = core_h + (border * 2)  # 4 px
+    
+    # 2. Colors
+    c_solid = (color[0], color[1], color[2], 255)  # Core
+    c_side  = (color[0], color[1], color[2], 51)   # 20% Opacity
+    c_diag  = (color[0], color[1], color[2], 25)   # 10% Opacity (Corners)
+
+    # 3. Create Image
+    img = Image.new("RGBA", (total_w, total_h), (0, 0, 0, 0))
+    
+    # 4. Fill Pixels Manually for Precision
+    pixels = img.load()
+
+    # --- ROW 0 (Top Border) ---
+    pixels[0, 0] = c_diag  # Top-Left Corner
+    pixels[1, 0] = c_side
+    pixels[2, 0] = c_side
+    pixels[3, 0] = c_side
+    pixels[4, 0] = c_diag  # Top-Right Corner
+
+    # --- ROW 1 (Middle Top) ---
+    pixels[0, 1] = c_side  # Left Side
+    # Core Pixels
+    pixels[1, 1] = c_solid
+    pixels[2, 1] = c_solid
+    pixels[3, 1] = c_solid
+    pixels[4, 1] = c_side  # Right Side
+
+    # --- ROW 2 (Middle Bottom) ---
+    pixels[0, 2] = c_side  # Left Side
+    # Core Pixels
+    pixels[1, 2] = c_solid
+    pixels[2, 2] = c_solid
+    pixels[3, 2] = c_solid
+    pixels[4, 2] = c_side  # Right Side
+
+    # --- ROW 3 (Bottom Border) ---
+    pixels[0, 3] = c_diag  # Bottom-Left Corner
+    pixels[1, 3] = c_side
+    pixels[2, 3] = c_side
+    pixels[3, 3] = c_side
+    pixels[4, 3] = c_diag  # Bottom-Right Corner
+
+    return img
 
 
 # TODO - Pass banner image to this function.
