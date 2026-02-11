@@ -120,7 +120,7 @@ def render_menu_level(entries, base_image, arrow_icon, menu_id="root"):
                     paste_y -= 10
 
                     img.paste(icon, (paste_x, paste_y), icon if icon.mode == 'RGBA' else None)
-
+        # TODO - CHANGE TO SIMPLER NAMING E.G - fortgrub1, fortgrub2, etc. (will then be a class added to grub.cfg entries to link them to the correct image)
         filename = f"menu_{menu_id}_selected_{i + 1}.png"
         save_image(img, filename, output_path=THEME_DIR + f"/icons/")
 
