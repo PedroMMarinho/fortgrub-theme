@@ -129,7 +129,7 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
     img.paste(icon, (paste_x, paste_y), icon if icon.mode == 'RGBA' else None)
         
     # Reference point of crown and text 
-    reference_point = (center_x - 42, paste_y - 48)
+    reference_point = (center_x - 42, paste_y - 56)
 
     font_path = os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf")
     font = load_font(font_path, 21)
@@ -168,6 +168,13 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
     # Status Text
     status_text = "Ready" if slot_idx == 0 else "Not Ready" 
     status_color = "#64bc47" if slot_idx == 0 else "#ff737e"
+
+    status_pos_x = text_start_x
+    status_pos_y = reference_point[1] + 40
+
+    # 2. Draw Text centered
+    # anchor="mm" means the (x, y) coordinates refer to the Middle-Middle of the text box
+    draw.text((status_pos_x, status_pos_y), status_text, font=font, fill=status_color, anchor="lm")
     
 def draw_dashed_line(img, start_pos, min_width, font, text, text_start_x):
     text_width = font.getlength(text)
