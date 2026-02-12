@@ -25,5 +25,6 @@ def run():
     # Add banner image
     current_image = add_banner(current_image, config)
 
+    save_image(current_image, "test.png")
     # TODO: Add icons entries with the info of entries.
-    generate_final_images(entries, current_image)
+    #generate_final_images(entries, current_image)

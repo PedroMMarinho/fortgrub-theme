@@ -14,9 +14,11 @@ BACKGROUNDS_DIR = os.path.join(ASSETS_DIR, "backgrounds")
 IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
 THEME_DIR = os.path.join(PROJECT_ROOT, "theme")
 FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
+BANNERS_DIR = os.path.join(ASSETS_DIR, "banners")
 
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")
+COLORS_CONFIG_PATH = os.path.join(BANNERS_DIR + "/pallet/", "colors.json")
 BASE_IMAGE = os.path.join(ASSETS_DIR, "base.png")
 
 

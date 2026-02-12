@@ -1,6 +1,9 @@
 {
     "background": "default.png",
-    "banner-info": ["color", "banner-img"],
+    "banner": {
+        "color" : "DefaultColor2",
+        "icon" : "StandardBanner31.png"
+    },
     "randomize-banner": true,
     "menu-entries": [
         {
