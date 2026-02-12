@@ -1,8 +1,9 @@
 import os
 from helpers.utils import load_config, load_image, save_image, BASE_IMAGE
 from helpers.grub_parser import parse_grub_cfg
-from helpers.background import add_background
-from helpers.insert_icon import generate_final_images
+from modifiers.insert_background import add_background
+from modifiers.insert_icon import generate_final_images
+from modifiers.insert_banner import add_banner
 
 def run():
     print("Starting Theme Update ...")
@@ -21,7 +22,8 @@ def run():
     # Add background to base image
     current_image = add_background(base_image, config)
 
-    save_image(current_image, "test.png")
+    # Add banner image
+    current_image = add_banner(current_image, config)
 
     # TODO: Add icons entries with the info of entries.
     generate_final_images(entries, current_image)

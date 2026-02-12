@@ -1,2 +1,6 @@
 pillow
 cairosvg
+# For web scraping
+requests 
+beautifulsoup4
+tqdm

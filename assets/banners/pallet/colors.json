@@ -1,0 +1,442 @@
+{
+    "DefaultColor1": {
+        "rgb": [
+            102,
+            102,
+            102
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "Gray666666FF"
+    },
+    "DefaultColor2": {
+        "rgb": [
+            255,
+            0,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "RedH0"
+    },
+    "DefaultColor3": {
+        "rgb": [
+            255,
+            25,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "OrangeH6"
+    },
+    "DefaultColor4": {
+        "rgb": [
+            255,
+            76,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "OrangeYellowH18"
+    },
+    "DefaultColor5": {
+        "rgb": [
+            255,
+            127,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "YellowH30"
+    },
+    "DefaultColor6": {
+        "rgb": [
+            255,
+            170,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "YellowH40"
+    },
+    "DefaultColor7": {
+        "rgb": [
+            255,
+            212,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "YellowH50"
+    },
+    "DefaultColor8": {
+        "rgb": [
+            170,
+            255,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "GreenH80"
+    },
+    "DefaultColor9": {
+        "rgb": [
+            84,
+            255,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "GreenH100"
+    },
+    "DefaultColor10": {
+        "rgb": [
+            0,
+            255,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "GreenH120"
+    },
+    "DefaultColor11": {
+        "rgb": [
+            0,
+            255,
+            85
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "GreenH140"
+    },
+    "DefaultColor12": {
+        "rgb": [
+            0,
+            255,
+            169
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "GreenBlueH160"
+    },
+    "DefaultColor13": {
+        "rgb": [
+            0,
+            255,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "BlueH180"
+    },
+    "DefaultColor14": {
+        "rgb": [
+            0,
+            169,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "BlueH200"
+    },
+    "DefaultColor15": {
+        "rgb": [
+            0,
+            84,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "BlueH220"
+    },
+    "DefaultColor16": {
+        "rgb": [
+            0,
+            0,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "BlueH240"
+    },
+    "DefaultColor17": {
+        "rgb": [
+            84,
+            0,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "PurpleH260"
+    },
+    "DefaultColor18": {
+        "rgb": [
+            170,
+            0,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "PurpleH280"
+    },
+    "DefaultColor19": {
+        "rgb": [
+            255,
+            0,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "PurplePinkH300"
+    },
+    "DefaultColor20": {
+        "rgb": [
+            255,
+            0,
+            170
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "PinkH320"
+    },
+    "DefaultColor21": {
+        "rgb": [
+            255,
+            0,
+            85
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 0,
+        "raw": "PinkH340"
+    },
+    "DefaultColor22": {
+        "rgb": [
+            61,
+            61,
+            61
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "Gray666666FFDark"
+    },
+    "DefaultColor23": {
+        "rgb": [
+            178,
+            178,
+            178
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "Gray666666FFLight"
+    },
+    "DefaultColor24": {
+        "rgb": [
+            127,
+            0,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "RedH0Dark"
+    },
+    "DefaultColor25": {
+        "rgb": [
+            255,
+            127,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "RedH0Light"
+    },
+    "DefaultColor26": {
+        "rgb": [
+            255,
+            140,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "OrangeH6Light"
+    },
+    "DefaultColor27": {
+        "rgb": [
+            127,
+            38,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "OrangeYellowH18Dark"
+    },
+    "DefaultColor28": {
+        "rgb": [
+            255,
+            165,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "OrangeYellowH18Light"
+    },
+    "DefaultColor29": {
+        "rgb": [
+            127,
+            63,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "YellowH30Dark"
+    },
+    "DefaultColor30": {
+        "rgb": [
+            85,
+            127,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "GreenH80Dark"
+    },
+    "DefaultColor31": {
+        "rgb": [
+            212,
+            255,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "GreenH80Light"
+    },
+    "DefaultColor32": {
+        "rgb": [
+            42,
+            127,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "GreenH100Dark"
+    },
+    "DefaultColor33": {
+        "rgb": [
+            0,
+            127,
+            0
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "GreenH120Dark"
+    },
+    "DefaultColor34": {
+        "rgb": [
+            127,
+            255,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "GreenH120Light"
+    },
+    "DefaultColor35": {
+        "rgb": [
+            127,
+            255,
+            170
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "GreenH140Light"
+    },
+    "DefaultColor36": {
+        "rgb": [
+            0,
+            127,
+            84
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "GreenBlueH160Dark"
+    },
+    "DefaultColor37": {
+        "rgb": [
+            0,
+            42,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "BlueH220Dark"
+    },
+    "DefaultColor38": {
+        "rgb": [
+            0,
+            0,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "BlueH240Dark"
+    },
+    "DefaultColor39": {
+        "rgb": [
+            127,
+            127,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "BlueH240Light"
+    },
+    "DefaultColor40": {
+        "rgb": [
+            42,
+            0,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "PurpleH260Dark"
+    },
+    "DefaultColor41": {
+        "rgb": [
+            169,
+            127,
+            255
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "PurpleH260Light"
+    },
+    "DefaultColor42": {
+        "rgb": [
+            85,
+            0,
+            127
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "PurpleH280Dark"
+    },
+    "DefaultColor43": {
+        "rgb": [
+            127,
+            0,
+            42
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 1,
+        "raw": "PinkH340Dark"
+    },
+    "DefaultColor44": {
+        "rgb": [
+            255,
+            127,
+            170
+        ],
+        "category": "DefaultColorSet1",
+        "subCategoryGroup": 2,
+        "raw": "PinkH340Light"
+    }
+}

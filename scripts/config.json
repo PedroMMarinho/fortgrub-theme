@@ -1,4 +1,7 @@
 {
+    "background": "default.png",
+    "banner-info": ["color", "banner-img"],
+    "randomize-banner": true,
     "menu-entries": [
         {
             "name": "Arch",
@@ -21,7 +24,26 @@
                 "os"
             ],
             "children": []
+        },
+        {
+            "name": "Windows",
+            "type": "menuentry",
+            "class": [
+                "windows",
+                "os"
+            ],
+            "children": []
+        },
+        {
+            "name": "Fedora",
+            "type": "menuentry",
+            "class": [
+                "fedora",
+                "gnu-linux",
+                "gnu",
+                "os"
+            ],
+            "children": []
         }
-    ],
-    "background": "default.png"
+    ]
 }
