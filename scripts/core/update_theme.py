@@ -23,8 +23,8 @@ def run():
     current_image = add_background(base_image, config)
 
     # Add banner image
-    current_image = add_banner(current_image, config)
+    current_image, banner_img = add_banner(current_image, config)
 
-    save_image(current_image, "test.png")
+    #save_image(current_image, "test.png")
     # TODO: Add icons entries with the info of entries.
-    #generate_final_images(entries, current_image)
+    generate_final_images(entries, current_image, banner_img)

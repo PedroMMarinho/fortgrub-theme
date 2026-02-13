@@ -174,13 +174,18 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx, ba
 
     draw.text((status_pos_x, status_pos_y), status_text, font=font, fill=status_color, anchor="lm")
 
+
+    banner_pos = (reference_point[0] - 48, reference_point[1] + 3)
+
     # Draw main banner
     if slot_idx == 0:
-        # TODO
-        banner_image = None
+        # Resize banner image to 40x50
+        banner_image = banner_image.resize((40, 50))
+        img.paste(banner_image, banner_pos, banner_image)
     else:
-        # random banner
+        # random banner TODO
         pass 
+
 def draw_dashed_line(img, start_pos, min_width, font, text, text_start_x):
     text_width = font.getlength(text)
     

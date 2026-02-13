@@ -70,4 +70,4 @@ def add_banner(base_image, config):
     
     base_image.paste(banner_img, banner_position, banner_img)
     
-    return base_image
+    return base_image, banner_img
