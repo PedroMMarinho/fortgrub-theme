@@ -56,7 +56,9 @@ def get_icon_for_classes(classes, size):
 
             except Exception as e:
                 print(f"❌ Error converting {cls}.svg: {e}")
-    return None
+
+    # Throw error if no icon found for any class
+    raise ValueError(f"No icon found for classes {class_list}")
 
 def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="root", global_counter=None, config=None):
     if global_counter is None:

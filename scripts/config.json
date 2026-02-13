@@ -1,13 +1,13 @@
 {
     "background": "default.png",
     "banner": {
-        "color": "DefaultColor2",
+        "color": "Red",
         "icon": "StandardBanner31.png"
     },
     "randomize-banner": true,
     "menu-entries": [
         {
-            "name": "Arch",
+            "name": "Champion of Ash",
             "type": "menuentry",
             "class": [
                 "arch",
@@ -19,60 +19,56 @@
             "injected_class": "fortgrub1"
         },
         {
-            "name": "Ubuntu",
-            "type": "menuentry",
-            "class": [
-                "ubuntu",
-                "gnu-linux",
-                "gnu",
-                "os"
-            ],
-            "children": [
-                {
-                    "name": "Ubuntu Recovery",
-                    "type": "menuentry",
-                    "class": [
-                        "ubuntu-recovery",
-                        "gnu-linux",
-                        "gnu",
-                        "ubuntu"
-                    ],
-                    "children": [],
-                    "injected_class": "fortgrub5"
-                },
-                {
-                    "name": "Ubuntu Old Kernel",
-                    "type": "menuentry",
-                    "class": [
-                        "ubuntu-old-kernel",
-                        "gnu-linux",
-                        "gnu",
-                        "ubuntu"
-                    ],
-                    "children": [],
-                    "injected_class": "fortgrub6"
-                }
-            ],
-            "injected_class": "fortgrub2"
-        },
-        {
-            "name": "Windows",
+            "name": " Lord of Cinder",
             "type": "menuentry",
             "class": [
                 "windows",
                 "os"
             ],
             "children": [],
+            "injected_class": "fortgrub2"
+        },
+        {
+            "name": " Restore Ember",
+            "type": "submenu",
+            "class": [
+                "ember",
+                "ubuntu"
+            ],
+            "children": [
+                {
+                    "name": "Arch kernel Linux",
+                    "type": "menuentry",
+                    "class": [
+                        "arch",
+                        "gnu-linux",
+                        "gnu",
+                        "os"
+                    ],
+                    "children": [],
+                    "injected_class": "fortgrub5"
+                },
+                {
+                    "name": "Arch Linux Fallback",
+                    "type": "menuentry",
+                    "class": [
+                        "arch",
+                        "gnu-linux",
+                        "gnu",
+                        "os"
+                    ],
+                    "children": [],
+                    "injected_class": "fortgrub6"
+                }
+            ],
             "injected_class": "fortgrub3"
         },
         {
-            "name": "Fedora",
+            "name": " Firelink Shrine",
             "type": "menuentry",
             "class": [
-                "fedora",
-                "gnu-linux",
-                "gnu",
-                "os"
+                "bonefire",
+                "gnu"
             ],
             "children": [],
             "injected_class": "fortgrub4"

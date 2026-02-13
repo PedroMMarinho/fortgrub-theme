@@ -1,442 +1,354 @@
 {
-    "DefaultColor1": {
-        "rgb": [
-            102,
-            102,
-            102
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "Gray666666FF"
-    },
-    "DefaultColor2": {
-        "rgb": [
-            255,
-            0,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "RedH0"
-    },
-    "DefaultColor3": {
-        "rgb": [
-            255,
-            25,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "OrangeH6"
-    },
-    "DefaultColor4": {
-        "rgb": [
-            255,
-            76,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "OrangeYellowH18"
-    },
-    "DefaultColor5": {
-        "rgb": [
-            255,
-            127,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "YellowH30"
-    },
-    "DefaultColor6": {
-        "rgb": [
-            255,
-            170,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "YellowH40"
-    },
-    "DefaultColor7": {
-        "rgb": [
-            255,
-            212,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "YellowH50"
-    },
-    "DefaultColor8": {
-        "rgb": [
-            170,
-            255,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "GreenH80"
-    },
-    "DefaultColor9": {
+    "Gray": {
         "rgb": [
             84,
-            255,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "GreenH100"
-    },
-    "DefaultColor10": {
-        "rgb": [
-            0,
-            255,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "GreenH120"
-    },
-    "DefaultColor11": {
-        "rgb": [
-            0,
-            255,
-            85
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "GreenH140"
-    },
-    "DefaultColor12": {
-        "rgb": [
-            0,
-            255,
-            169
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "GreenBlueH160"
-    },
-    "DefaultColor13": {
-        "rgb": [
-            0,
-            255,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "BlueH180"
-    },
-    "DefaultColor14": {
-        "rgb": [
-            0,
-            169,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "BlueH200"
-    },
-    "DefaultColor15": {
-        "rgb": [
-            0,
             84,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "BlueH220"
-    },
-    "DefaultColor16": {
-        "rgb": [
-            0,
-            0,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "BlueH240"
-    },
-    "DefaultColor17": {
-        "rgb": [
-            84,
-            0,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "PurpleH260"
-    },
-    "DefaultColor18": {
-        "rgb": [
-            170,
-            0,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "PurpleH280"
-    },
-    "DefaultColor19": {
-        "rgb": [
-            255,
-            0,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "PurplePinkH300"
-    },
-    "DefaultColor20": {
-        "rgb": [
-            255,
-            0,
-            170
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "PinkH320"
-    },
-    "DefaultColor21": {
-        "rgb": [
-            255,
-            0,
-            85
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 0,
-        "raw": "PinkH340"
-    },
-    "DefaultColor22": {
-        "rgb": [
-            61,
-            61,
-            61
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "Gray666666FFDark"
-    },
-    "DefaultColor23": {
-        "rgb": [
-            178,
-            178,
-            178
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "Gray666666FFLight"
-    },
-    "DefaultColor24": {
-        "rgb": [
-            127,
-            0,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "RedH0Dark"
-    },
-    "DefaultColor25": {
-        "rgb": [
-            255,
-            127,
-            127
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "RedH0Light"
-    },
-    "DefaultColor26": {
-        "rgb": [
-            255,
-            140,
-            127
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "OrangeH6Light"
-    },
-    "DefaultColor27": {
-        "rgb": [
-            127,
-            38,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "OrangeYellowH18Dark"
-    },
-    "DefaultColor28": {
-        "rgb": [
-            255,
-            165,
-            127
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "OrangeYellowH18Light"
-    },
-    "DefaultColor29": {
-        "rgb": [
-            127,
-            63,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "YellowH30Dark"
-    },
-    "DefaultColor30": {
-        "rgb": [
-            85,
-            127,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "GreenH80Dark"
-    },
-    "DefaultColor31": {
-        "rgb": [
-            212,
-            255,
-            127
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "GreenH80Light"
-    },
-    "DefaultColor32": {
-        "rgb": [
-            42,
-            127,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "GreenH100Dark"
-    },
-    "DefaultColor33": {
-        "rgb": [
-            0,
-            127,
-            0
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "GreenH120Dark"
-    },
-    "DefaultColor34": {
-        "rgb": [
-            127,
-            255,
-            127
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "GreenH120Light"
-    },
-    "DefaultColor35": {
-        "rgb": [
-            127,
-            255,
-            170
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "GreenH140Light"
-    },
-    "DefaultColor36": {
-        "rgb": [
-            0,
-            127,
             84
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "GreenBlueH160Dark"
+        "raw": "#545454"
     },
-    "DefaultColor37": {
+    "Red": {
+        "rgb": [
+            205,
+            0,
+            0
+        ],
+        "raw": "#cd0000"
+    },
+    "Orange": {
+        "rgb": [
+            223,
+            73,
+            0
+        ],
+        "raw": "#df4900"
+    },
+    "Tangerine": {
+        "rgb": [
+            228,
+            120,
+            0
+        ],
+        "raw": "#e47800"
+    },
+    "Gold": {
+        "rgb": [
+            225,
+            173,
+            0
+        ],
+        "raw": "#e1ad00"
+    },
+    "GoldenYellow": {
+        "rgb": [
+            223,
+            195,
+            0
+        ],
+        "raw": "#dfc300"
+    },
+    "Yellow": {
+        "rgb": [
+            228,
+            221,
+            0
+        ],
+        "raw": "#e4dd00"
+    },
+    "ElectricLime": {
+        "rgb": [
+            201,
+            230,
+            0
+        ],
+        "raw": "#c9e600"
+    },
+    "LawnGreen": {
+        "rgb": [
+            144,
+            226,
+            0
+        ],
+        "raw": "#90e200"
+    },
+    "Lime": {
         "rgb": [
             0,
-            42,
-            127
+            228,
+            0
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "BlueH220Dark"
+        "raw": "#00e400"
     },
-    "DefaultColor38": {
+    "CaribbeanGreen": {
+        "rgb": [
+            0,
+            228,
+            146
+        ],
+        "raw": "#00e492"
+    },
+    "Turquoise": {
+        "rgb": [
+            0,
+            225,
+            196
+        ],
+        "raw": "#00e1c4"
+    },
+    "Aqua": {
+        "rgb": [
+            0,
+            224,
+            225
+        ],
+        "raw": "#00e0e1"
+    },
+    "DarkTurquoise": {
+        "rgb": [
+            0,
+            200,
+            228
+        ],
+        "raw": "#00c8e4"
+    },
+    "SkyBlue": {
+        "rgb": [
+            0,
+            144,
+            226
+        ],
+        "raw": "#0090e2"
+    },
+    "Blue": {
         "rgb": [
             0,
             0,
-            127
+            227
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "BlueH240Dark"
+        "raw": "#0000e3"
     },
-    "DefaultColor39": {
+    "ElectricPurple": {
         "rgb": [
-            127,
-            127,
-            255
-        ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "BlueH240Light"
-    },
-    "DefaultColor40": {
-        "rgb": [
-            42,
+            144,
             0,
-            127
+            226
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "PurpleH260Dark"
+        "raw": "#9000e2"
     },
-    "DefaultColor41": {
+    "DeepMagenta": {
         "rgb": [
-            169,
-            127,
-            255
+            201,
+            0,
+            230
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "PurpleH260Light"
+        "raw": "#c900e6"
     },
-    "DefaultColor42": {
+    "Magenta": {
+        "rgb": [
+            231,
+            0,
+            231
+        ],
+        "raw": "#e700e7"
+    },
+    "Pink": {
+        "rgb": [
+            228,
+            0,
+            200
+        ],
+        "raw": "#e400c8"
+    },
+    "DarkerPink": {
+        "rgb": [
+            229,
+            0,
+            148
+        ],
+        "raw": "#e50094"
+    },
+    "Black": {
+        "rgb": [
+            28,
+            27,
+            28
+        ],
+        "raw": "#1c1b1c"
+    },
+    "Maroon": {
         "rgb": [
             85,
             0,
-            127
+            0
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "PurpleH280Dark"
+        "raw": "#550000"
     },
-    "DefaultColor43": {
+    "Brown": {
         "rgb": [
-            127,
-            0,
-            42
+            93,
+            44,
+            0
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 1,
-        "raw": "PinkH340Dark"
+        "raw": "#5d2c00"
     },
-    "DefaultColor44": {
+    "DarkGold": {
+        "rgb": [
+            93,
+            70,
+            0
+        ],
+        "raw": "#5d4600"
+    },
+    "VerdunGreen": {
+        "rgb": [
+            78,
+            92,
+            0
+        ],
+        "raw": "#4e5c00"
+    },
+    "DarkGreen": {
+        "rgb": [
+            56,
+            94,
+            0
+        ],
+        "raw": "#385e00"
+    },
+    "Green": {
+        "rgb": [
+            0,
+            92,
+            0
+        ],
+        "raw": "#005c00"
+    },
+    "Mosque": {
+        "rgb": [
+            0,
+            92,
+            80
+        ],
+        "raw": "#005c50"
+    },
+    "PrussianBlue": {
+        "rgb": [
+            0,
+            56,
+            93
+        ],
+        "raw": "#00385d"
+    },
+    "Navy": {
+        "rgb": [
+            0,
+            0,
+            92
+        ],
+        "raw": "#00005c"
+    },
+    "Indigo": {
+        "rgb": [
+            56,
+            0,
+            94
+        ],
+        "raw": "#38005e"
+    },
+    "Purple": {
+        "rgb": [
+            81,
+            0,
+            94
+        ],
+        "raw": "#51005e"
+    },
+    "TyrianPurple": {
+        "rgb": [
+            93,
+            0,
+            56
+        ],
+        "raw": "#5d0038"
+    },
+    "White": {
+        "rgb": [
+            229,
+            230,
+            230
+        ],
+        "raw": "#e5e6e6"
+    },
+    "Salmon": {
         "rgb": [
             255,
-            127,
-            170
+            124,
+            124
         ],
-        "category": "DefaultColorSet1",
-        "subCategoryGroup": 2,
-        "raw": "PinkH340Light"
+        "raw": "#ff7c7c"
+    },
+    "Grandis": {
+        "rgb": [
+            255,
+            206,
+            109
+        ],
+        "raw": "#ffce6d"
+    },
+    "PalePrim": {
+        "rgb": [
+            255,
+            246,
+            157
+        ],
+        "raw": "#fff69d"
+    },
+    "Conifer": {
+        "rgb": [
+            203,
+            243,
+            104
+        ],
+        "raw": "#cbf368"
+    },
+    "MintGreen": {
+        "rgb": [
+            156,
+            255,
+            157
+        ],
+        "raw": "#9cff9d"
+    },
+    "ElectricBlue": {
+        "rgb": [
+            157,
+            255,
+            255
+        ],
+        "raw": "#9dffff"
+    },
+    "Perano": {
+        "rgb": [
+            156,
+            154,
+            255
+        ],
+        "raw": "#9c9aff"
+    },
+    "Mauve": {
+        "rgb": [
+            214,
+            156,
+            255
+        ],
+        "raw": "#d69cff"
+    },
+    "Violet": {
+        "rgb": [
+            255,
+            154,
+            255
+        ],
+        "raw": "#ff9aff"
     }
 }

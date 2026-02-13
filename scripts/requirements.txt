@@ -4,3 +4,4 @@ cairosvg
 requests 
 beautifulsoup4
 tqdm
+cloudscraper
