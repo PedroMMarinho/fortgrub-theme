@@ -1,9 +1,10 @@
+import json
 import os
 import io
 import cairosvg
 from PIL import Image, ImageOps, ImageDraw
 
-from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, THEME_DIR, FONTS_DIR, load_image, load_font
+from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, THEME_DIR, FONTS_DIR, load_image, load_font, THEME_CONFIG_PATH
 
 LAYOUT_CONFIG = [
     {"pos": (922, 632),  "size": (300, 300)}, 
@@ -57,7 +58,10 @@ def get_icon_for_classes(classes, size):
                 print(f"❌ Error converting {cls}.svg: {e}")
     return None
 
-def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="root"):
+def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="root", global_counter=None, config=None):
+    if global_counter is None:
+        global_counter = [0]
+
     count = len(entries)
     if count == 0: return
 
@@ -98,18 +102,34 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
             else:
                 entry = entries[item["entry_idx"]]
                 gen_icon_for_entry(entry, slot_size, slot_pos, (arrow_w, arrow_h), img, item["slot_idx"], banner_image)
+        
+        global_counter[0] += 1
+        current_id = global_counter[0]
+        
+        # 2. Define the class name (e.g., "fortgrub1")
+        class_name = f"fortgrub{current_id}"
+        
+        # 3. Inject into the JSON entry and save it to the config
+        entries[i]["injected_class"] = class_name
+        
+        with open(THEME_CONFIG_PATH, 'w') as f:
+            json.dump(config, f, indent=4)
 
 
+        clean_filename = f"{class_name}.png"
+        save_image(img, clean_filename, output_path=THEME_DIR + f"/icons/")
 
-        # TODO - CHANGE TO SIMPLER NAMING E.G - fortgrub1, fortgrub2, etc. (will then be a class added to grub.cfg entries to link them to the correct image)
-        filename = f"menu_{menu_id}_selected_{i + 1}.png"
-        save_image(img, filename, output_path=THEME_DIR + f"/icons/")
+        # For debugging purposes
+        #debug_filename = f"menu_{menu_id}_selected_{i + 1}.png"
+        #save_image(img, debug_filename, output_path=THEME_DIR + f"/icons/") 
+        
 
     # Recurse
     for idx, entry in enumerate(entries):
         if entry.get("children"):
             sub_id = f"{menu_id}_{idx + 1}"
-            render_menu_level(entry["children"], base_image, arrow_icon, banner_image, sub_id)
+            render_menu_level(entry["children"], base_image, arrow_icon, banner_image, sub_id, global_counter, config)
+
 
 def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx, banner_image):
 
@@ -268,11 +288,12 @@ def create_detailed_segment(color=(255, 255, 255)):
 
 
 # TODO - Pass banner image to this function.
-def generate_final_images(entries, base_image, banner_image):
+def generate_final_images(config, base_image, banner_image):
     print("⏳ Loading Arrow Resources...")
     arrow_icon = load_image(ARROW_ICON_PATH)
 
+    entries = config.get("menu-entries", [])
     print(f"Processing {len(entries)} root entries...")
-    render_menu_level(entries, base_image, arrow_icon, banner_image, "root")
+    render_menu_level(entries, base_image, arrow_icon, banner_image, "root", [0], config)
     print("✅ Theme generation complete.")
 

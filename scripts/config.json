@@ -1,8 +1,8 @@
 {
     "background": "default.png",
     "banner": {
-        "color" : "DefaultColor2",
-        "icon" : "StandardBanner31.png"
+        "color": "DefaultColor2",
+        "icon": "StandardBanner31.png"
     },
     "randomize-banner": true,
     "menu-entries": [
@@ -15,7 +15,8 @@
                 "gnu",
                 "os"
             ],
-            "children": []
+            "children": [],
+            "injected_class": "fortgrub1"
         },
         {
             "name": "Ubuntu",
@@ -26,7 +27,33 @@
                 "gnu",
                 "os"
             ],
-            "children": []
+            "children": [
+                {
+                    "name": "Ubuntu Recovery",
+                    "type": "menuentry",
+                    "class": [
+                        "ubuntu-recovery",
+                        "gnu-linux",
+                        "gnu",
+                        "ubuntu"
+                    ],
+                    "children": [],
+                    "injected_class": "fortgrub5"
+                },
+                {
+                    "name": "Ubuntu Old Kernel",
+                    "type": "menuentry",
+                    "class": [
+                        "ubuntu-old-kernel",
+                        "gnu-linux",
+                        "gnu",
+                        "ubuntu"
+                    ],
+                    "children": [],
+                    "injected_class": "fortgrub6"
+                }
+            ],
+            "injected_class": "fortgrub2"
         },
         {
             "name": "Windows",
@@ -35,7 +62,8 @@
                 "windows",
                 "os"
             ],
-            "children": []
+            "children": [],
+            "injected_class": "fortgrub3"
         },
         {
             "name": "Fedora",
@@ -46,7 +74,8 @@
                 "gnu",
                 "os"
             ],
-            "children": []
+            "children": [],
+            "injected_class": "fortgrub4"
         }
     ]
 }
