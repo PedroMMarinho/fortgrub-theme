@@ -1,25 +1,66 @@
 from PIL import Image, ImageDraw, ImageOps
 from helpers.utils import load_config, COLORS_CONFIG_PATH, load_image, BANNERS_DIR
 
+def shift_color_brightness(rgb, factor):
+    """
+    Adjusts the brightness of an RGB tuple.
+    factor > 1.0 = Lighter
+    factor < 1.0 = Darker
+    """
+    r, g, b = rgb
+    new_r = min(255, int(r * factor))
+    new_g = min(255, int(g * factor))
+    new_b = min(255, int(b * factor))
+    return (new_r, new_g, new_b)
+
+def create_linear_gradient_fill(size, top_color, bottom_color):
+    """
+    Generates a vertical linear gradient from top_color to bottom_color.
+    """
+    width, height = size
+    
+    gradient = Image.new('RGB', (1, height))
+    pixels = gradient.load()
+
+    for y in range(height):
+        ratio = y / float(height - 1) 
+        
+        r = int(top_color[0] * (1 - ratio) + bottom_color[0] * ratio)
+        g = int(top_color[1] * (1 - ratio) + bottom_color[1] * ratio)
+        b = int(top_color[2] * (1 - ratio) + bottom_color[2] * ratio)
+        
+        pixels[0, y] = (r, g, b)
+    
+    return gradient.resize((width, height))
+
 def create_banner_bg(color):
     width, height = 96, 120
     
-    img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
+    if len(color) == 4: color = color[:3]
     
-    # (x, y) points
+    top_color = shift_color_brightness(color, 1.3)
+    bottom_color = shift_color_brightness(color, 0.7)
+    
+    banner_img = create_linear_gradient_fill((width, height), top_color, bottom_color)
+    banner_img = banner_img.convert("RGBA") 
+    
+    mask = Image.new("L", (width, height), 0) 
+    draw_mask = ImageDraw.Draw(mask)
+    
     points = [
         (0, 0),          # Top Left
         (96, 0),         # Top Right
         (96, 93),        # Right Vertical End
-        (49, 120),       # Right Tip (96 - 47 = 49)
-        (47, 120),       # Left Tip (0 + 47 = 47)
+        (49, 120),       # Right Tip
+        (47, 120),       # Left Tip
         (0, 93)          # Left Vertical End
     ]
     
-    draw.polygon(points, fill=color)
-    # TODO GRADIENT FILL
-    return img
+    draw_mask.polygon(points, fill=255)
+    
+    banner_img.putalpha(mask)
+    
+    return banner_img
 
 def process_banner_icon(icon_name):
     target_size = (128, 128) 

@@ -2,7 +2,7 @@
     "background": "default.png",
     "banner": {
         "color": "Red",
-        "icon": "StandardBanner31.png"
+        "icon": "AchievementWorldExplorer.png"
     },
     "randomize-banner": true,
     "menu-entries": [
