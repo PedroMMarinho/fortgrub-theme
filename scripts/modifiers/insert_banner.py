@@ -86,7 +86,7 @@ def process_banner_icon(icon_name):
         print(f"❌ Error processing banner icon: {e}")
         return None
 
-
+# TODO Add border images
 def draw_border(base_image, center_x, center_y, level):
     # The upper limit for each "tier"
     level_thresholds = [4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 84, 89, 94, 99]
