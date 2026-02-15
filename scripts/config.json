@@ -5,6 +5,8 @@
         "icon": "AchievementWorldExplorer.png"
     },
     "randomize-banner": true,
+    "vbucks": 1477,
+    "level": 100,
     "menu-entries": [
         {
             "name": "Champion of Ash",
@@ -73,6 +75,5 @@
             "children": [],
             "injected_class": "fortgrub4"
         }
-    ],
-    "vbucks": 1477
+    ]
 }

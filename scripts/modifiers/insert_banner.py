@@ -1,5 +1,8 @@
 from PIL import Image, ImageDraw, ImageOps
 from helpers.utils import load_config, COLORS_CONFIG_PATH, load_image, BANNERS_DIR
+import bisect
+import os
+
 
 def shift_color_brightness(rgb, factor):
     """
@@ -47,13 +50,16 @@ def create_banner_bg(color):
     mask = Image.new("L", (width, height), 0) 
     draw_mask = ImageDraw.Draw(mask)
     
+    bridge_width = 1
+    center_x = width // 2  # 48
+    
     points = [
-        (0, 0),          # Top Left
-        (96, 0),         # Top Right
-        (96, 93),        # Right Vertical End
-        (49, 120),       # Right Tip
-        (47, 120),       # Left Tip
-        (0, 93)          # Left Vertical End
+        (0, 0),                         # Top Left
+        (width - 1, 0),                 # Top Right (95)
+        (width - 1, 93),                # Right Vertical End (95)
+        (center_x + bridge_width, height - 1),  # Right Bridge Tip (51, 119)
+        (center_x - bridge_width, height - 1),  # Left Bridge Tip (45, 119)
+        (0, 93)                         # Left Vertical End
     ]
     
     draw_mask.polygon(points, fill=255)
@@ -79,6 +85,36 @@ def process_banner_icon(icon_name):
     except Exception as e:
         print(f"❌ Error processing banner icon: {e}")
         return None
+
+
+def draw_border(base_image, center_x, center_y, level):
+    # The upper limit for each "tier"
+    level_thresholds = [4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 84, 89, 94, 99]
+    
+    # 1. Find the Index
+    # Level 1 -> Index 0 (Value 4)
+    # Level 4 -> Index 0 (Value 4)
+    # Level 5 -> Index 1 (Value 9)
+    # Level 100 -> Index 20 (End of list)
+    image_index = bisect.bisect_left(level_thresholds, level)
+    
+    filename = f"border_{image_index}.png"
+    file_path = os.path.join(BANNERS_DIR, "borders", filename)
+    
+    try:
+        border_img = load_image(file_path) if os.path.exists(file_path) else load_image(os.path.join(BANNERS_DIR, "borders", "border_0.png"))
+        
+        if border_img:
+            border_w, border_h = border_img.size
+            
+            paste_x = center_x - (border_w // 2)
+            paste_y = center_y - (border_h // 2)
+            
+            base_image.paste(border_img, (paste_x, paste_y), border_img)
+    except Exception as e:
+        print(f"❌ Error loading border image: {e}")            
+
+    return base_image
 
 def add_banner(base_image, config): 
     banner_info = config.get("banner", {})
@@ -111,4 +147,12 @@ def add_banner(base_image, config):
     
     base_image.paste(banner_img, banner_position, banner_img)
     
+    banner_width, banner_height = banner_img.size
+    
+    center_x = (banner_width // 2) + banner_position[0]
+    center_y = (banner_height // 2) + banner_position[1]
+    
+    
+    draw_border(base_image, center_x, center_y, config.get("level", 1))
+
     return base_image, banner_img
