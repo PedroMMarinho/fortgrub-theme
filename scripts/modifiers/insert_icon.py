@@ -105,6 +105,9 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
                 entry = entries[item["entry_idx"]]
                 gen_icon_for_entry(entry, slot_size, slot_pos, (arrow_w, arrow_h), img, item["slot_idx"], banner_image)
         
+        # Current entry number (People icon)
+        draw_entry_number(img, count)
+
         global_counter[0] += 1
         current_id = global_counter[0]
         
@@ -131,6 +134,24 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
         if entry.get("children"):
             sub_id = f"{menu_id}_{idx + 1}"
             render_menu_level(entry["children"], base_image, arrow_icon, banner_image, sub_id, global_counter, config)
+
+def draw_entry_number(img, count):
+    font_path = os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf")
+    font = load_font(font_path, 21)
+
+    text = str(count)
+    position = (1693, 33)
+
+    # 1. Get the bounding box of the text [left, top, right, bottom]
+    bbox = font.getbbox(text)
+    
+    text_height = bbox[3] - bbox[1]
+
+    draw = ImageDraw.Draw(img)
+    
+    position = (position[0], position[1] + (text_height // 2))
+    
+    draw.text(position, text, font=font, fill="white", anchor="lm")
 
 
 def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx, banner_image):
@@ -289,7 +310,6 @@ def create_detailed_segment(color=(255, 255, 255)):
     return img
 
 
-# TODO - Pass banner image to this function.
 def generate_final_images(config, base_image, banner_image):
     print("⏳ Loading Arrow Resources...")
     arrow_icon = load_image(ARROW_ICON_PATH)

@@ -4,6 +4,10 @@ import json
 import PIL.Image as Image
 from PIL import ImageFont
 
+import subprocess
+import re
+
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Directories
@@ -58,3 +62,24 @@ def load_font(path, size):
     except Exception as e:
         print(f"❌ Error: Failed to load font. {e}")
         return None
+
+
+def get_package_count() -> int:
+    for command in [["fastfetch", "-c", "neofetch"], ["neofetch"]]:
+        try:
+            output = subprocess.run(command, stdout=subprocess.PIPE, text=True, check=True).stdout
+            break
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            continue
+    else:
+        print("Error: Neither Fastfetch or Neofetch are available.")
+        return 0
+
+    for line in output.splitlines():
+        if "Packages" in line:
+            numbers = [int(n) for n in re.findall(r"\d+", line)]
+            total_packages = sum(numbers)
+            return total_packages
+    else:
+        print("Error: Could not find package count.")
+        return 0

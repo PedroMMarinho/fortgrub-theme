@@ -4,6 +4,7 @@ from helpers.grub_parser import parse_grub_cfg
 from modifiers.insert_background import add_background
 from modifiers.insert_icon import generate_final_images
 from modifiers.insert_banner import add_banner
+from modifiers.insert_vbucks import add_vbucks
 
 def run():
     print("Starting Theme Update ...")
@@ -25,7 +26,10 @@ def run():
     # Add banner image
     current_image, banner_img = add_banner(current_image, config)
 
-    #save_image(current_image, "test.png")
+    # Add vbucks info
+    current_image = add_vbucks(current_image, config)
+
+    save_image(current_image, "test.png")
     # TODO: Add icons entries with the info of entries.
     generate_final_images(config, current_image, banner_img)
 
