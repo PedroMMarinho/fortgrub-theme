@@ -30,7 +30,8 @@ def run():
     current_image = add_vbucks(current_image, config)
 
     save_image(current_image, "test.png")
+    
     # TODO: Add icons entries with the info of entries.
-    generate_final_images(config, current_image, banner_img)
+    #generate_final_images(config, current_image, banner_img)
 
     # TODO - Change grub.cfg or other file to have the class of that entry as the injected one. (e.g., fortgrub1, fortgrub2, etc)

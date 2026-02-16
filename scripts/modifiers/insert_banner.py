@@ -98,21 +98,39 @@ def draw_border(base_image, center_x, center_y, level):
     # Level 100 -> Index 20 (End of list)
     image_index = bisect.bisect_left(level_thresholds, level)
     
-    filename = f"border_{image_index}.png"
+    filename = f"banner_border_{image_index}.png"
     file_path = os.path.join(BANNERS_DIR, "borders", filename)
     
-    try:
-        border_img = load_image(file_path) if os.path.exists(file_path) else load_image(os.path.join(BANNERS_DIR, "borders", "border_0.png"))
+    
+    border_img = load_image(file_path) if os.path.exists(file_path) else None
+
+    
+    if border_img:
+        border_w, border_h = border_img.size
         
-        if border_img:
-            border_w, border_h = border_img.size
-            
-            paste_x = center_x - (border_w // 2)
-            paste_y = center_y - (border_h // 2)
-            
-            base_image.paste(border_img, (paste_x, paste_y), border_img)
-    except Exception as e:
-        print(f"❌ Error loading border image: {e}")            
+        paste_x = center_x - (border_w // 2)
+        paste_y = center_y - (border_h // 2)
+        
+        base_image.paste(border_img, (paste_x, paste_y), border_img)
+    else:
+        print(f"⚠️ Warning: Border image for level {level} not found at {file_path}. Using level 0 fallback.")
+        fallback_path = os.path.join(BANNERS_DIR, "borders", "banner_border_0.png")
+        fallback_img = load_image(fallback_path)
+
+        if fallback_img:
+            fallback_w, fallback_h = fallback_img.size
+
+            paste_x = center_x - (fallback_w // 2)
+            paste_y = center_y - (fallback_h // 2)
+            base_image.paste(fallback_img, (paste_x, paste_y), fallback_img)
+
+    # Debug - Draw a red rectangle around the banner area to visualize the center and size (for development purposes)
+    #draw = ImageDraw.Draw(base_image)
+    #draw.rectangle(
+    #    [center_x - 100, center_y - 100, center_x + 99, center_y + 99], 
+    #    outline="red", width=1
+    #)
+    #print(f"❌ Error loading border image for level {level}. Expected at {file_path}. Drew fallback rectangle instead.")            
 
     return base_image
 
