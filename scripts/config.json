@@ -2,11 +2,11 @@
     "background": "default.png",
     "banner": {
         "color": "Red",
-        "icon": "AchievementWorldExplorer.png"
+        "icon": "StandardBanner31.png"
     },
     "randomize-banner": true,
     "vbucks": 1477,
-    "level": 100,
+    "level": 1,
     "menu-entries": [
         {
             "name": "Champion of Ash",

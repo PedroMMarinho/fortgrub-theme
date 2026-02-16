@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw, ImageOps, ImageEnhance
 from helpers.utils import load_config, COLORS_CONFIG_PATH, load_image, BANNERS_DIR
 import bisect
 import os
@@ -134,6 +134,49 @@ def draw_border(base_image, center_x, center_y, level):
 
     return base_image
 
+
+
+def apply_inner_border(banner_img, border_width=3, darkness_factor=0.6):
+    """
+    darkness_factor: 1.0 = Original, 0.5 = 50% Darker.
+    """
+  
+    enhancer = ImageEnhance.Brightness(banner_img)
+    dark_clone = enhancer.enhance(darkness_factor)
+    
+    w, h = banner_img.size
+    
+  
+    border_mask = Image.new("L", (w, h), 0)
+    draw_mask = ImageDraw.Draw(border_mask)
+    
+    bridge_width = 1
+    center_x = w // 2 
+    points = [
+        (0, 0),                         
+        (w - 1, 0),                 
+        (w - 1, 93),                
+        (center_x + bridge_width, h - 1),  
+        (center_x - bridge_width, h - 1),  
+        (0, 93)                         
+    ]
+    
+    draw_mask.line(points + [points[0]], fill=255, width=border_width * 2)
+
+    original_alpha = banner_img.split()[-1]
+    
+    final_mask = Image.new("L", (w, h), 0)
+    
+
+    final_mask.paste(border_mask, (0, 0), original_alpha)
+
+    result_img = banner_img.copy()
+    result_img.paste(dark_clone, (0, 0), final_mask)
+    
+    return result_img
+
+
+
 def add_banner(base_image, config): 
     banner_info = config.get("banner", {})
     banner_icon_name = banner_info.get("icon")
@@ -163,9 +206,12 @@ def add_banner(base_image, config):
 
     banner_position = (91, 250) 
     
-    base_image.paste(banner_img, banner_position, banner_img)
+    # Banner with border darkened for better contrast against the background
+    banner_to_paste = apply_inner_border(banner_img, border_width=2, darkness_factor=0.80)
+
+    base_image.paste(banner_to_paste, banner_position, banner_img)
     
-    banner_width, banner_height = banner_img.size
+    banner_width, banner_height = banner_to_paste.size
     
     center_x = (banner_width // 2) + banner_position[0]
     center_y = (banner_height // 2) + banner_position[1]
