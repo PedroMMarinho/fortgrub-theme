@@ -38,31 +38,40 @@ def create_linear_gradient_fill(size, top_color, bottom_color):
 
 def create_banner_bg(color):
     width, height = 96, 120
+    supersample = 4  # Draw at 4x scale for perfectly smooth edges
     
     if len(color) == 4: color = color[:3]
     
     top_color = shift_color_brightness(color, 1.3)
     bottom_color = shift_color_brightness(color, 0.7)
     
+    # Create the base gradient at normal size
     banner_img = create_linear_gradient_fill((width, height), top_color, bottom_color)
     banner_img = banner_img.convert("RGBA") 
     
-    mask = Image.new("L", (width, height), 0) 
+    # Create a LARGER mask for supersampling
+    mask_w = width * supersample
+    mask_h = height * supersample
+    mask = Image.new("L", (mask_w, mask_h), 0) 
     draw_mask = ImageDraw.Draw(mask)
     
-    bridge_width = 1
-    center_x = width // 2  # 48
+    bridge_width = 1 * supersample
+    center_x = mask_w // 2 
     
+    # Scale all coordinates by the supersample factor
     points = [
-        (0, 0),                         # Top Left
-        (width - 1, 0),                 # Top Right (95)
-        (width - 1, 93),                # Right Vertical End (95)
-        (center_x + bridge_width, height - 1),  # Right Bridge Tip (51, 119)
-        (center_x - bridge_width, height - 1),  # Left Bridge Tip (45, 119)
-        (0, 93)                         # Left Vertical End
+        (0, 0),                         
+        (mask_w - 1, 0),                 
+        (mask_w - 1, 93 * supersample),                
+        (center_x + bridge_width, mask_h - 1),  
+        (center_x - bridge_width, mask_h - 1),  
+        (0, 93 * supersample)                         
     ]
     
     draw_mask.polygon(points, fill=255)
+    
+    # Resize the mask back down using LANCZOS for smooth anti-aliasing
+    mask = mask.resize((width, height), resample=Image.Resampling.LANCZOS)
     
     banner_img.putalpha(mask)
     
@@ -140,34 +149,39 @@ def apply_inner_border(banner_img, border_width=3, darkness_factor=0.6):
     """
     darkness_factor: 1.0 = Original, 0.5 = 50% Darker.
     """
-  
+    supersample = 4 
+    
     enhancer = ImageEnhance.Brightness(banner_img)
     dark_clone = enhancer.enhance(darkness_factor)
     
     w, h = banner_img.size
+    mask_w = w * supersample
+    mask_h = h * supersample
     
-  
-    border_mask = Image.new("L", (w, h), 0)
+    # Create the LARGER mask
+    border_mask = Image.new("L", (mask_w, mask_h), 0)
     draw_mask = ImageDraw.Draw(border_mask)
     
-    bridge_width = 1
-    center_x = w // 2 
+    bridge_width = 1 * supersample
+    center_x = mask_w // 2 
+    
     points = [
         (0, 0),                         
-        (w - 1, 0),                 
-        (w - 1, 93),                
-        (center_x + bridge_width, h - 1),  
-        (center_x - bridge_width, h - 1),  
-        (0, 93)                         
+        (mask_w - 1, 0),                 
+        (mask_w - 1, 93 * supersample),                
+        (center_x + bridge_width, mask_h - 1),  
+        (center_x - bridge_width, mask_h - 1),  
+        (0, 93 * supersample)                         
     ]
     
-    draw_mask.line(points + [points[0]], fill=255, width=border_width * 2)
+    # Draw the line, making sure to scale the line width too
+    draw_mask.line(points + [points[0]], fill=255, width=(border_width * 2) * supersample)
+
+    border_mask = border_mask.resize((w, h), resample=Image.Resampling.LANCZOS)
 
     original_alpha = banner_img.split()[-1]
     
     final_mask = Image.new("L", (w, h), 0)
-    
-
     final_mask.paste(border_mask, (0, 0), original_alpha)
 
     result_img = banner_img.copy()
@@ -207,7 +221,7 @@ def add_banner(base_image, config):
     banner_position = (91, 250) 
     
     # Banner with border darkened for better contrast against the background
-    banner_to_paste = apply_inner_border(banner_img, border_width=2, darkness_factor=0.80)
+    banner_to_paste = apply_inner_border(banner_img, border_width=2, darkness_factor=0.86)
 
     base_image.paste(banner_to_paste, banner_position, banner_img)
     
