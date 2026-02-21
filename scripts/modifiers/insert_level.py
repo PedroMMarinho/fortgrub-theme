@@ -1,7 +1,6 @@
-from PIL import ImageColor, ImageDraw, ImageFont, Image
+from PIL import ImageDraw, ImageFont, Image
 from helpers.utils import FONTS_DIR
 import os
-
 
 def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
     font_size = 64
@@ -11,19 +10,30 @@ def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
     overlay = Image.new("RGBA", base_image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
-    # 2. Draw stroke and base text shape
-    stroke_color = (0, 0, 0, 204) 
-
-
-    # 3. Get text dimensions
-    bbox = draw.textbbox((pos_x, pos_y), text, font=font)
-    left, top, right, bottom = bbox
-    text_width = right - left
-    text_height = bottom - top
+    # Get the raw, tight bounding box as if we drew it at (0,0)
+    raw_bbox = draw.textbbox((0, 0), text, font=font)
+    raw_left, raw_top, raw_right, raw_bottom = raw_bbox
     
-    print(top)
+    text_width = raw_right - raw_left
+    text_height = raw_bottom - raw_top
+    
+    if text_width <= 0 or text_height <= 0:
+        return base_image
+
+    # Calculate exactly where to start drawing so the TOP-LEFT hits pos_x, pos_y
+    draw_x = pos_x - raw_left
+    draw_y = pos_y - raw_top
+
+    left = int(draw_x + raw_left) 
+    top = int(draw_y + raw_top)    
+    right = int(draw_x + raw_right)
+    bottom = int(draw_y + raw_bottom)
+    # --------------------------------------
+
+    # 2. Draw stroke and base text shape using calculated coordinates
+    stroke_color = (0, 0, 0, 204) 
     draw.text(
-        (pos_x, pos_y), 
+        (draw_x, draw_y), 
         text, 
         font=font, 
         fill=(255, 255, 255, 255), 
@@ -31,31 +41,25 @@ def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
         stroke_fill=stroke_color,
     )
 
-    if text_width <= 0 or text_height <= 0:
-        return base_image
-
-    # 4. Generate the Anti-Aliased Gradient
-    gradient_img = Image.new("RGBA", (text_width, text_height))
+    # 3. Generate the Anti-Aliased Gradient
+    gradient_img = Image.new("RGBA", (int(text_width), int(text_height)))
     pixels = gradient_img.load()
 
     mid_x = text_width / 2.0
     base_mid_y = text_height * 0.55
     
-    arch_drop = 4.0 # How many pixels the curve drops at the edges (creates the dome)
-    shadow_height = text_height * 0.20 # Top shadow only covers the top 
+    arch_drop = 4.0 
+    shadow_height = text_height * 0.20 
 
-    color_shadow_top = (216, 219, 223) # #d8dbdf
+    color_shadow_top = (216, 219, 223) 
     color_white = (255, 255, 255)
-    color_bottom = (215, 216, 218)     # #d7d8da
+    color_bottom = (215, 216, 218)     
 
-    for x in range(text_width):
+    for x in range(int(text_width)):
         x_norm = (x - mid_x) / mid_x 
-        
         curve_y = base_mid_y + (arch_drop * (x_norm ** 2))
 
-        for y in range(text_height):
-            
-            # --- TOP COLOR LOGIC (Shadow + White) ---
+        for y in range(int(text_height)):
             if y <= shadow_height:
                 ratio = y / max(1.0, shadow_height)
                 top_r = int(color_shadow_top[0] + (255 - color_shadow_top[0]) * ratio)
@@ -67,28 +71,35 @@ def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
 
             if y < int(curve_y):
                 pixels[x, y] = (*current_top_color, 255)
-                
             elif y > int(curve_y):
                 pixels[x, y] = (*color_bottom, 255)
-                
             else:
                 frac = curve_y - int(curve_y) 
-                
                 r = int(current_top_color[0] * frac + color_bottom[0] * (1 - frac))
                 g = int(current_top_color[1] * frac + color_bottom[1] * (1 - frac))
                 b = int(current_top_color[2] * frac + color_bottom[2] * (1 - frac))
-                
                 pixels[x, y] = (r, g, b, 255)
 
-    # 5. Mask and Apply
+    # 4. Mask and Apply
     mask = Image.new("RGBA", base_image.size, (0, 0, 0, 0))
     mask_draw = ImageDraw.Draw(mask)
-    mask_draw.text((pos_x, pos_y), text, font=font, fill=(255, 255, 255, 255))
+    mask_draw.text((draw_x, draw_y), text, font=font, fill=(255, 255, 255, 255))
 
     full_gradient = Image.new("RGBA", base_image.size, (0, 0, 0, 0))
     full_gradient.paste(gradient_img, (left, top))
 
     overlay.paste(full_gradient, (0, 0), mask)
+    
+    debug = False
+    # --- DEBUGGING VISUALS ---
+    if debug:
+        debug_draw = ImageDraw.Draw(overlay)
+        # Draw red bounding box
+        debug_draw.rectangle([left, top, right, bottom], outline="red", width=2)
+        # Draw green crosshair at the exact pos_x, pos_y target (now top-left)
+        debug_draw.line([(pos_x - 20, pos_y), (pos_x + 20, pos_y)], fill="green", width=2)
+        debug_draw.line([(pos_x, pos_y - 20), (pos_x, pos_y + 20)], fill="green", width=2)
+
     base_rgba = base_image.convert("RGBA")
     combined = Image.alpha_composite(base_rgba, overlay)
 

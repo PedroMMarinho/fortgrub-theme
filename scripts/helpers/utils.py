@@ -23,7 +23,7 @@ BANNERS_DIR = os.path.join(ASSETS_DIR, "banners")
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")
 COLORS_CONFIG_PATH = os.path.join(BANNERS_DIR + "/pallet/", "colors.json")
-BASE_IMAGE = os.path.join(ASSETS_DIR, "base1.png")
+BASE_IMAGE = os.path.join(ASSETS_DIR, "base.png")
 
 
 def load_config(path=THEME_CONFIG_PATH):
