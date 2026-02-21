@@ -5,6 +5,7 @@ from modifiers.insert_background import add_background
 from modifiers.insert_icon import generate_final_images
 from modifiers.insert_banner import add_banner
 from modifiers.insert_vbucks import add_vbucks
+from modifiers.insert_level import add_level_text
 
 def run():
     print("Starting Theme Update ...")
@@ -29,9 +30,12 @@ def run():
     # Add vbucks info
     current_image = add_vbucks(current_image, config)
 
+    # Add level text
+    current_image = add_level_text(current_image, config)
+
     save_image(current_image, "test.png")
 
     # TODO: Add icons entries with the info of entries.
-    generate_final_images(config, current_image, banner_img)
+    #generate_final_images(config, current_image, banner_img)
 
     # TODO - Change grub.cfg or other file to have the class of that entry as the injected one. (e.g., fortgrub1, fortgrub2, etc)
