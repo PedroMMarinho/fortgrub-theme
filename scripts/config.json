@@ -35,7 +35,7 @@
             "type": "submenu",
             "class": [
                 "ember",
-                "ubuntu"
+                "options"
             ],
             "children": [
                 {
@@ -70,7 +70,7 @@
             "type": "menuentry",
             "class": [
                 "bonefire",
-                "gnu"
+                "bios"
             ],
             "children": [],
             "injected_class": "fortgrub4"

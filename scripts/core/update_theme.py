@@ -14,8 +14,8 @@ def run():
     print(config)
     
     # For testing purposes, we will use the parsed grub.cfg entries instead of the config.json ones.
-    entries = config.get("menu-entries", [])
-    #entries = parse_grub_cfg(config, True)
+    #entries = config.get("menu-entries", [])
+    entries = parse_grub_cfg(config, True)
     print(entries)
 
     # LOAD BASE IMAGE
@@ -36,6 +36,6 @@ def run():
     save_image(current_image, "test.png")
 
     # TODO: Add icons entries with the info of entries.
-    #generate_final_images(config, current_image, banner_img)
+    generate_final_images(config, current_image, banner_img)
 
     # TODO - Change grub.cfg or other file to have the class of that entry as the injected one. (e.g., fortgrub1, fortgrub2, etc)

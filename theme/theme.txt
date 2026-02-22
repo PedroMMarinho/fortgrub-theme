@@ -1,10 +1,25 @@
 desktop-color: "#000000"
 title-text: ""
+
+
 terminal-font: ""
-terminal-left: "5%"
-terminal-top: "80%"
-terminal-width: "100%"
-terminal-height: "100%"
+terminal-left: "18%+4"
+terminal-top: "21%+4"
+terminal-width: "63%+11"
+terminal-height: "63%+8"
+
++ progress_bar {
+    id = "__timeout__"
+    left = 1%+5
+    width = 75%
+    top = 94%+1
+    height = 64
+    text = ""
+    font = ""
+    text_color = "#ffffff"
+    bar_style = "progress_bar_*.png"
+    highlight_style = "progress_highlight_*.png"
+}
 
 + boot_menu {
     left = 0%
