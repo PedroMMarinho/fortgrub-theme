@@ -1,0 +1,37 @@
+desktop-color: "#000000"
+title-text: ""
+
+# TODO TERMINAL STILL NOT STYLED
+terminal-font: ""
+terminal-left: "18%+4"
+terminal-top: "21%+4"
+terminal-width: "63%+11"
+terminal-height: "63%+8"
+
++ progress_bar {
+    id = "__timeout__"
+    left = 1%+5
+    width = 75%
+    top = 94%+1
+    height = 64
+    text = ""
+    font = ""
+    text_color = "#ffffff"
+    bar_style = "progress_bar_*.png"
+    highlight_style = "progress_highlight_*.png"
+}
+
++ boot_menu {
+    left = 0%
+    top = 0%
+    width = 110%
+    height = 100%
+    # Monitor Width and Height
+    icon_width = {MONITOR_WIDTH}
+    icon_height = {MONITOR_HEIGHT}
+    item_height = {MONITOR_HEIGHT}
+    item_width = 100
+    item_padding = 0
+    item_icon_space = 0
+    item_spacing = 0
+}

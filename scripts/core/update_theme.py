@@ -6,6 +6,7 @@ from modifiers.insert_icon import generate_final_images
 from modifiers.insert_banner import add_banner
 from modifiers.insert_vbucks import add_vbucks
 from modifiers.insert_level import add_level_text
+from modifiers.insert_emoticon import change_emoticon
 
 def run():
     print("Starting Theme Update ...")
@@ -33,7 +34,10 @@ def run():
     # Add level text
     current_image = add_level_text(current_image, config)
 
-    save_image(current_image, "test.png")
+    # Change progress bar emoticon
+    change_emoticon(config)
+
+    #save_image(current_image, "test.png")
 
     # TODO: Add icons entries with the info of entries.
     generate_final_images(config, current_image, banner_img)
