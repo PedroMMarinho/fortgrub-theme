@@ -43,13 +43,15 @@ def parse_grub_cfg(config, save_to_config = True, cfg_path=GRUB_CFG_PATH):
             classes = []
             for i, token in enumerate(tokens):
                 if token == '--class' and i + 1 < len(tokens):
-                    classes.append(tokens[i+1])
+                    class_value = tokens[i+1]
+                    if not class_value.startswith('fortgrub'):
+                        classes.append(class_value)
             
             new_entry = {
                 "name": current_name,
                 "type": entry_type,
                 "class": classes,
-                "children": []
+                "children": [],
             }
             
             if isinstance(stack[-1], list):

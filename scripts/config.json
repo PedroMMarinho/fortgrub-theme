@@ -4,15 +4,14 @@
         "color": "Red",
         "icon": "StandardBanner31.png"
     },
-    "vbucks": 1432,
     "level": 100,
+    "vbucks": 1434,
     "progress-bar-emoticon": "Emoji_Ace.png",
     "menu-entries": [
         {
             "name": "Champion of Ash",
             "type": "menuentry",
             "class": [
-                "fortgrub1",
                 "arch",
                 "gnu-linux",
                 "gnu",
@@ -25,7 +24,6 @@
             "name": " Lord of Cinder",
             "type": "menuentry",
             "class": [
-                "fortgrub2",
                 "windows",
                 "os"
             ],
@@ -36,7 +34,6 @@
             "name": " Restore Ember",
             "type": "submenu",
             "class": [
-                "fortgrub3",
                 "ember",
                 "options"
             ],
@@ -45,7 +42,6 @@
                     "name": "Arch kernel Linux",
                     "type": "menuentry",
                     "class": [
-                        "fortgrub5",
                         "arch",
                         "gnu-linux",
                         "gnu",
@@ -58,7 +54,6 @@
                     "name": "Arch Linux Fallback",
                     "type": "menuentry",
                     "class": [
-                        "fortgrub6",
                         "arch",
                         "gnu-linux",
                         "gnu",
@@ -74,7 +69,6 @@
             "name": " Firelink Shrine",
             "type": "menuentry",
             "class": [
-                "fortgrub4",
                 "bonefire",
                 "bios"
             ],
