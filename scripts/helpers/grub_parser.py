@@ -1,18 +1,18 @@
 import re
 import os
 import json
-from helpers.utils import THEME_CONFIG_PATH
+from helpers.utils import ENTRIES_CONFIG_PATH
 import shlex
 
 GRUB_CFG_PATH = '/boot/grub/grub.cfg'
 
 
-def parse_grub_cfg(config, save_to_config = True, cfg_path=GRUB_CFG_PATH):
-    if not os.path.exists(cfg_path):
-        print(f"❌ Error: grub.cfg not found at {cfg_path}")
+def parse_grub_cfg(config, save_to_config = True):
+    if not os.path.exists(GRUB_CFG_PATH):
+        print(f"❌ Error: grub.cfg not found at {GRUB_CFG_PATH}")
         return []
 
-    with open(cfg_path, 'r') as f:
+    with open(GRUB_CFG_PATH, 'r') as f:
         lines = f.readlines()
 
     entries = []
@@ -62,10 +62,10 @@ def parse_grub_cfg(config, save_to_config = True, cfg_path=GRUB_CFG_PATH):
                     stack.append(new_entry['children'])
                 else:
                     stack.append("IGNORE")
-                    
+    
     if save_to_config:
-        config['menu-entries'] = entries
-        with open(THEME_CONFIG_PATH, 'w') as f:
+        config["entries"] = entries
+        with open(ENTRIES_CONFIG_PATH, 'w') as f:
             json.dump(config, f, indent=4)
 
     return entries

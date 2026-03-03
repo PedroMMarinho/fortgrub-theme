@@ -1,7 +1,4 @@
 {
-    "vbucks": 1434,
-    "background": "Batman.png",
-    "progress-bar-emoticon": "Emoji_Ace.png",
     "entries": [
         {
             "name": "Champion of Ash",
@@ -12,12 +9,7 @@
                 "gnu",
                 "os"
             ],
-            "children": [],
-            "level": 100,
-            "banner": {
-                "color": "Red",
-                "icon": "StandardBanner31.png"
-            }
+            "children": []
         },
         {
             "name": " Lord of Cinder",
@@ -26,12 +18,7 @@
                 "windows",
                 "os"
             ],
-            "children": [],
-            "level": 100,
-            "banner": {
-                "color": "Red",
-                "icon": "StandardBanner31.png"
-            }
+            "children": []
         },
         {
             "name": " Restore Ember",
@@ -50,12 +37,7 @@
                         "gnu",
                         "os"
                     ],
-                    "children": [],
-                    "level": 100,
-                    "banner": {
-                        "color": "Red",
-                        "icon": "StandardBanner31.png"
-                    }
+                    "children": []
                 },
                 {
                     "name": "Arch Linux Fallback",
@@ -66,19 +48,9 @@
                         "gnu",
                         "os"
                     ],
-                    "children": [],
-                    "level": 100,
-                    "banner": {
-                        "color": "Red",
-                        "icon": "StandardBanner31.png"
-                    }
+                    "children": []
                 }
-            ],
-            "level": 100,
-            "banner": {
-                "color": "Red",
-                "icon": "StandardBanner31.png"
-            }
+            ]
         },
         {
             "name": " Firelink Shrine",
@@ -87,12 +59,7 @@
                 "bonefire",
                 "bios"
             ],
-            "children": [],
-            "level": 100,
-            "banner": {
-                "color": "Red",
-                "icon": "StandardBanner31.png"
-            }
+            "children": []
         }
     ]
 }

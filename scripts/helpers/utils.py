@@ -20,10 +20,13 @@ THEME_DIR = os.path.join(PROJECT_ROOT, "theme")
 FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
 BANNERS_DIR = os.path.join(ASSETS_DIR, "banners")
 EMOTICONS_DIR =  os.path.join(ASSETS_DIR, "emoticons")
+JSONS_DIR = os.path.join(SCRIPTS_DIR, "jsons")
 
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")
-COLORS_CONFIG_PATH = os.path.join(BANNERS_DIR + "/pallet/", "colors.json")
+ENTRIES_CONFIG_PATH = os.path.join(JSONS_DIR, "entries.json")
+DEFAULT_ENTRY_CONFIG_PATH = os.path.join(JSONS_DIR, "entry-default.json")
+COLORS_CONFIG_PATH = os.path.join(BANNERS_DIR, "pallet", "colors.json")
 BASE_IMAGE = os.path.join(ASSETS_DIR, "base.png")
 
 
@@ -38,6 +41,15 @@ def load_config(path=THEME_CONFIG_PATH):
     except json.JSONDecodeError as e:
         print(f"❌ Error: Failed to parse JSON. {e}")
         return None
+
+def save_config(config, path=THEME_CONFIG_PATH):
+    try:
+        with open(path, 'w') as f:
+            json.dump(config, f, indent=4)
+            print(f"✅ Saved config to {path}")
+    except Exception as e:
+        print(f"❌ Error: Failed to save config. {e}")
+
 
 def load_image(path):
     if not os.path.exists(path):
