@@ -1,6 +1,8 @@
 from PIL import ImageDraw, ImageFont, Image
 from helpers.utils import FONTS_DIR, IMAGES_DIR, load_image
 import os
+import math
+
 
 def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
     font_size = 64
@@ -124,9 +126,6 @@ def create_progress_bar(progress, width):
     fill_color = "#c6ff28"
     border_size = 3  
 
-    # 1. Clamp progress to ensure it strictly stays between 0 and 100
-    progress = max(0.0, min(100.0, float(progress)))
-
     # 2. Create base image filled with total transparency
     img = Image.new("RGBA", (width, bar_height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
@@ -158,16 +157,57 @@ def create_progress_bar(progress, width):
 
     return img
 
+# Aproximation of the original XP curve based on known milestones and the total XP for level 99.
+def get_og_max_xp(level):
+    if level >= 100:
+        return 0
+        
+    known_points = {
+        1: 100,
+        5: 700,
+        14: 1200,
+        15: 1250,
+        90: 28500
+    }
 
+    if level in known_points:
+        return known_points[level]
+
+    if level < 15:
+        lower_lvl = max([k for k in known_points.keys() if k < level])
+        upper_lvl = min([k for k in known_points.keys() if k > level])
+        
+        progress = (level - lower_lvl) / (upper_lvl - lower_lvl)
+        xp_diff = known_points[upper_lvl] - known_points[lower_lvl]
+        
+        calculated_xp = known_points[lower_lvl] + (xp_diff * progress)
+        return int(round(calculated_xp / 10.0) * 10)
+
+    # Handle the late-game exponential ramp-up (Levels 16-99)
+    # This specific curve locks Level 90 to exactly 28,500 
+    # and pushes the cumulative sum of 1-99 to exactly ~1,170,250 XP
+    
+    base_xp = 1250 
+    growth_rate = 0.0417 
+    
+    levels_past_15 = level - 15
+    
+    calculated_xp = base_xp * math.exp(growth_rate * levels_past_15)
+    
+    return int(round(calculated_xp / 10.0) * 10)
 
 def add_level_details(img, entry):
     level = entry.get("level", 1)
     # Percentage from 0 to 100 for the progress bar
     progress = entry.get("progress", 0)
+    # Clamp value
+    progress = max(0.0, min(99.99, float(progress)))
+
     reference_point = (242, 328)
 
     if level >= 100:
         progress_width = 238
+        # TODO
         pass
         # Put Max text with green progress bar
     else:
@@ -257,4 +297,56 @@ def add_level_details(img, entry):
 
         img.paste(text_overlay, (0, 0), text_overlay)
 
-        return
+        # Add XP text below the progress bar
+        needed_xp = get_og_max_xp(level)
+        current_xp = int((progress / 100.0) * needed_xp)
+        
+        font_bold = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21.5)
+        font_regular = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 29)
+        font_regular_small = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 21.5)
+
+        current_xp_str = f"{current_xp:,}"
+        text_bar = "/"
+        needed_xp_str = f"{needed_xp:,}"
+
+        # Get full bounding boxes
+        (left_xp, top_xp, right_xp, bottom_xp) = font_bold.getbbox(current_xp_str)
+        xp_width = right_xp - left_xp
+
+        (left_bar, top_bar, right_bar, bottom_bar) = font_regular.getbbox(text_bar)
+        bar_width = right_bar - left_bar
+
+        (left_needed, top_needed, right_needed, bottom_needed) = font_regular_small.getbbox(needed_xp_str)
+
+        # Get the highest top point and lowest bottom point between both strings
+        unified_top = min(top_xp, top_needed)
+        unified_bottom = max(bottom_xp, bottom_needed)
+
+        # 1. The absolute bottom line now ONLY applies to the slash
+        target_bottom_y = reference_point[1] - 7
+        
+        draw_y_bar = target_bottom_y - bottom_bar
+        slash_center_y = draw_y_bar + (top_bar + bottom_bar) / 2.0
+
+        # Calculate ONE shared Draw Y for both XP numbers to lock them together
+        draw_y_numbers = slash_center_y - (unified_top + unified_bottom) / 2.0
+
+        base_x = reference_point[0]
+
+        # Draw Current XP (100% White) using the shared Y
+        draw = ImageDraw.Draw(img)
+        draw.text((base_x, draw_y_numbers), current_xp_str, font=font_bold, fill="#ffffff")
+
+        text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        overlay_draw = ImageDraw.Draw(text_overlay)
+        color_xp_needed = (255, 255, 255, 102)
+
+        # Draw "/" (40% Opacity)
+        slash_x = base_x + xp_width + 4
+        overlay_draw.text((slash_x, draw_y_bar), text_bar, font=font_regular, fill=color_xp_needed)
+
+        # Draw Needed XP (40% Opacity) using the exact same shared Y
+        needed_x = slash_x + bar_width + 2
+        overlay_draw.text((needed_x, draw_y_numbers), needed_xp_str, font=font_regular_small, fill=color_xp_needed)
+
+        img.paste(text_overlay, (0, 0), text_overlay)
