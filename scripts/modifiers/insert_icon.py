@@ -5,7 +5,7 @@ import cairosvg
 from PIL import Image, ImageOps, ImageDraw
 from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, CACHED_DIR, FONTS_DIR, load_image, load_font, THEME_CONFIG_PATH
 from scripts.modifiers.insert_banner import add_banner, gen_base_banner
-from scripts.modifiers.insert_level import add_level_text
+from scripts.modifiers.insert_level import add_level_text, add_level_details
 
 LAYOUT_CONFIG = [
     {"pos": (922, 632),  "size": (300, 300)}, 
@@ -229,15 +229,20 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
         img,banner_image = add_banner(img, entry)
     else:
         banner_image = gen_base_banner(entry.get("banner", {}))
-    
-    # Draw level text on banner NOT WORKING GG
-    if slot_idx == 0:
-        img = add_level_text(img, entry)
 
     # Draw banner on top of the entry icon
     # Resize banner image to 40x50
     banner_image = banner_image.resize((40, 50))
     img.paste(banner_image, banner_pos, banner_image)
+
+    # Draw level text
+    if slot_idx == 0:        
+        image_with_text = add_level_text(img, entry)
+        
+        img.paste(image_with_text)
+
+        # Compute level logic (Stars and green bar)
+        add_level_details(img, entry)
 
     
 

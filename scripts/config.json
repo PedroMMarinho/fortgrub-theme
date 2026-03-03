@@ -13,7 +13,8 @@
                 "os"
             ],
             "children": [],
-            "level": 100,
+            "level": 2,
+            "progress": 20,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
@@ -28,10 +29,10 @@
                 "os"
             ],
             "children": [],
-            "level": 100,
+            "level": 25,
             "banner": {
-                "color": "Red",
-                "icon": "StandardBanner31.png"
+                "color": "Blue",
+                "icon": "Banner_ClaimReflect.png"
             },
             "id": "fortgrub2"
         },

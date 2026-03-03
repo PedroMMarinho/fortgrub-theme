@@ -1,5 +1,5 @@
 from PIL import ImageDraw, ImageFont, Image
-from helpers.utils import FONTS_DIR
+from helpers.utils import FONTS_DIR, IMAGES_DIR, load_image
 import os
 
 def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
@@ -103,7 +103,7 @@ def draw_fortnite_text(base_image, pos_x, pos_y, text, font_path):
     base_rgba = base_image.convert("RGBA")
     combined = Image.alpha_composite(base_rgba, overlay)
 
-    return combined.convert("RGB")
+    return combined.convert("RGBA")
 
 def add_level_text(base_image, config):
     level = config.get("level", 1)
@@ -116,3 +116,99 @@ def add_level_text(base_image, config):
     pos_y = 235
     
     return draw_fortnite_text(base_image, pos_x, pos_y, text_str, font_path)
+
+
+def create_progress_bar(progress, width):
+    bar_height = 18
+    border_color = "#636d84"
+    fill_color = "#c6ff28"
+    border_size = 3  
+
+    # 1. Clamp progress to ensure it strictly stays between 0 and 100
+    progress = max(0.0, min(100.0, float(progress)))
+
+    # 2. Create base image filled with total transparency
+    img = Image.new("RGBA", (width, bar_height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    # 3. Draw the border explicitly as an outline
+    draw.rectangle(
+        [0, 0, width - 1, bar_height - 1], 
+        outline=border_color, 
+        width=border_size
+    )
+
+    # Calculate inner coordinates for the fill
+    inner_x0 = border_size
+    inner_y0 = border_size
+    inner_x1 = width - border_size
+    inner_y1 = bar_height - border_size
+
+    # 4. Calculate and draw the filled progress
+    if progress > 0:
+        max_fill_width = (inner_x1 - inner_x0)
+        fill_width = int(max_fill_width * (progress / 100.0))
+        
+        # Only draw the fill if the width is at least 1 pixel
+        if fill_width > 0:
+            draw.rectangle(
+                [inner_x0, inner_y0, inner_x0 + fill_width - 1, inner_y1 - 1], 
+                fill=fill_color
+            )
+
+    return img
+
+
+
+def add_level_details(img, entry):
+    level = entry.get("level", 1)
+    # Percentage from 0 to 100 for the progress bar
+    progress = entry.get("progress", 0)
+    reference_point = (242, 328)
+
+    if level >= 100:
+        progress_width = 238
+        pass
+        # Put Max text with green progress bar
+    else:
+        progress_width = 148
+        
+        progress_bar = create_progress_bar(progress,progress_width)
+
+        img.paste(progress_bar, reference_point, progress_bar)
+
+        # Put arrow icon on the right of the progress bar
+        arrow_icon = load_image(os.path.join(IMAGES_DIR, "level-arrow.png"))
+
+        arrow_pos_x = reference_point[0] + progress_width + 8
+        arrow_pos_y = reference_point[1] + 1
+
+        arrow_pos_first = (arrow_pos_x, arrow_pos_y)
+        img.paste(arrow_icon, arrow_pos_first, arrow_icon)
+
+        arrow_pos_second = (arrow_pos_x, arrow_pos_y + 20 + arrow_icon.height)
+        img.paste(arrow_icon, arrow_pos_second, arrow_icon)
+
+
+        # Load star battle pass icon
+        level_star_icon = load_image(os.path.join(IMAGES_DIR, "level-star-exp.png"))
+
+        level_star_pos_first = (arrow_pos_x + 8 + arrow_icon.width, reference_point[1] - 5)
+
+        img.paste(level_star_icon, level_star_pos_first, level_star_icon)
+
+        level_star_pos_second = (level_star_pos_first[0], level_star_pos_first[1] + level_star_icon.height + 7)
+        img.paste(level_star_icon, level_star_pos_second, level_star_icon)
+
+        return
+        milestone_font = ImageFont.truetype(os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf"), 32)
+
+        # Get next level milestone
+        next_level_milestone = str((level // 5 + 1) * 5)
+        print(f"Current Level: {level}, Next Milestone: {next_level_milestone}")
+
+        milestone_pos = (360, 361)
+
+        # All white with opacity 80 %
+        draw = ImageDraw.Draw(img)
+        draw.text(milestone_pos, next_level_milestone, font=milestone_font, fill=(255, 255, 255, 204))

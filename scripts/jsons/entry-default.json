@@ -1,5 +1,6 @@
 {
     "level": 100,
+    "progress": 20,
     "banner": {
         "color": "Red",
         "icon": "StandardBanner31.png"
