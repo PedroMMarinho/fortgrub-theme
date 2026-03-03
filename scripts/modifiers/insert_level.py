@@ -223,15 +223,38 @@ def add_level_details(img, entry):
 
         draw.text((n_star_first_pos[0], n_star_first_pos[1] + offset_y_text + 20 - top), str(n_star_second), font=font, fill=color)
 
+       # Milestone text + LVL text
+        font = ImageFont.truetype(os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf"), 32)
+        level_text = "LVL"
+        milestone_str = str(next_level_milestone)
+
+        (left_lvl, top_lvl, right_lvl, _) = font.getbbox(level_text)
+        lvl_width = right_lvl - left_lvl
+
+        (left_mile, top_mile, right_mile, _) = font.getbbox(milestone_str)
+        mile_width = right_mile - left_mile
+
+        #  Calculate exact starting X coordinate to guarantee a 7px gap
+        # Total block size = [LVL width] + [4px gap] + [Milestone width]
+        total_text_width = lvl_width + 4 + mile_width
+        
+        start_x = arrow_pos_second[0] - 7 - total_text_width
+        
+        base_y = reference_point[1] + 33
+
+        text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        overlay_draw = ImageDraw.Draw(text_overlay)
+
+        # Draw "LVL" (40% Opacity) starting exactly at start_x
+        color_lvl = (255, 255, 255, 102)
+        lvl_target_pos = (start_x, base_y - top_lvl)
+        overlay_draw.text(lvl_target_pos, level_text, font=font, fill=color_lvl)
+
+        # Draw the Milestone Number (80% Opacity) 4 pixels after "LVL"
+        color_milestone = (255, 255, 255, 204)
+        mile_target_pos = (start_x + lvl_width + 4, base_y - top_mile)
+        overlay_draw.text(mile_target_pos, milestone_str, font=font, fill=color_milestone)
+
+        img.paste(text_overlay, (0, 0), text_overlay)
 
         return
-        milestone_font = ImageFont.truetype(os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf"), 32)
-
-        # Get next level milestone
-        print(f"Current Level: {level}, Next Milestone: {next_level_milestone}")
-
-        milestone_pos = (360, 361)
-
-        # All white with opacity 80 %
-        draw = ImageDraw.Draw(img)
-        draw.text(milestone_pos, next_level_milestone, font=milestone_font, fill=(255, 255, 255, 204))
