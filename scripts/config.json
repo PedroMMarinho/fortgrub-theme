@@ -17,7 +17,8 @@
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
-            }
+            },
+            "id": "fortgrub1"
         },
         {
             "name": " Lord of Cinder",
@@ -31,7 +32,8 @@
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
-            }
+            },
+            "id": "fortgrub2"
         },
         {
             "name": " Restore Ember",
@@ -55,7 +57,8 @@
                     "banner": {
                         "color": "Red",
                         "icon": "StandardBanner31.png"
-                    }
+                    },
+                    "id": "fortgrub5"
                 },
                 {
                     "name": "Arch Linux Fallback",
@@ -71,14 +74,16 @@
                     "banner": {
                         "color": "Red",
                         "icon": "StandardBanner31.png"
-                    }
+                    },
+                    "id": "fortgrub6"
                 }
             ],
             "level": 100,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
-            }
+            },
+            "id": "fortgrub3"
         },
         {
             "name": " Firelink Shrine",
@@ -92,7 +97,8 @@
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
-            }
+            },
+            "id": "fortgrub4"
         }
     ]
 }

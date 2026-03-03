@@ -190,33 +190,39 @@ def apply_inner_border(banner_img, border_width=3, darkness_factor=0.6):
     return result_img
 
 
+def gen_base_banner(banner_info):
 
-def add_banner(base_image, config): 
-    banner_info = config.get("banner", {})
     banner_icon_name = banner_info.get("icon")
     banner_color_name = banner_info.get("color")
 
     color_config = load_config(COLORS_CONFIG_PATH)
     banner_rgb = tuple(color_config.get(banner_color_name, {}).get("rgb", (100, 100, 100)))
-    
+
     banner_img = create_banner_bg(banner_rgb)
-    
 
     banner_mask = banner_img.split()[-1]
-    
-    if banner_icon_name:
-        icon_img = process_banner_icon(banner_icon_name)
+
+
+    icon_img = process_banner_icon(banner_icon_name)
         
-        if icon_img:
-            bg_w, bg_h = banner_img.size
-            icon_w, icon_h = icon_img.size
-            
-            pos_x = (bg_w - icon_w) // 2
-            pos_y = (bg_h - icon_h) // 2 
-            
-            banner_img.paste(icon_img, (pos_x, pos_y), icon_img)
-            
-            banner_img.putalpha(banner_mask)
+    bg_w, bg_h = banner_img.size
+    icon_w, icon_h = icon_img.size
+    
+    pos_x = (bg_w - icon_w) // 2
+    pos_y = (bg_h - icon_h) // 2 
+    
+    banner_img.paste(icon_img, (pos_x, pos_y), icon_img)
+    
+    banner_img.putalpha(banner_mask)
+
+    return banner_img
+
+
+def add_banner(base_image, config):
+
+    banner_info = config.get("banner", {})
+
+    banner_img = gen_base_banner(banner_info)
 
     banner_position = (91, 250) 
     

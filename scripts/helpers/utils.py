@@ -21,6 +21,7 @@ FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
 BANNERS_DIR = os.path.join(ASSETS_DIR, "banners")
 EMOTICONS_DIR =  os.path.join(ASSETS_DIR, "emoticons")
 JSONS_DIR = os.path.join(SCRIPTS_DIR, "jsons")
+CACHED_DIR = os.path.join(THEME_DIR, "cached")
 
 # Files
 THEME_CONFIG_PATH = os.path.join(SCRIPTS_DIR, "config.json")

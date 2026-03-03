@@ -3,8 +3,9 @@ import os
 import io
 import cairosvg
 from PIL import Image, ImageOps, ImageDraw
-
-from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, THEME_DIR, FONTS_DIR, load_image, load_font, THEME_CONFIG_PATH
+from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, CACHED_DIR, FONTS_DIR, load_image, load_font, THEME_CONFIG_PATH
+from scripts.modifiers.insert_banner import add_banner, gen_base_banner
+from scripts.modifiers.insert_level import add_level_text
 
 LAYOUT_CONFIG = [
     {"pos": (922, 632),  "size": (300, 300)}, 
@@ -60,7 +61,7 @@ def get_icon_for_classes(classes, size):
     # Throw error if no icon found for any class
     raise ValueError(f"No icon found for classes {class_list}")
 
-def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="root", global_counter=None, config=None):
+def render_menu_level(entries, base_image, arrow_icon, menu_id="root", global_counter=None, config=None):
     if global_counter is None:
         global_counter = [0]
 
@@ -93,17 +94,20 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
             slot_size = slot_config["size"] 
             
             arrow_w, arrow_h = (0, 0)
+            
             if arrow_icon:
                 arrow_w, arrow_h = arrow_icon.size
 
+            # Empty slot
             if item["is_arrow"]:
                 if arrow_icon:
                     icon = arrow_icon
                     paste_x, paste_y = slot_pos
                     img.paste(icon, (paste_x, paste_y), icon if icon.mode == 'RGBA' else None)
             else:
+                # Generate icon for the entry
                 entry = entries[item["entry_idx"]]
-                gen_icon_for_entry(entry, slot_size, slot_pos, (arrow_w, arrow_h), img, item["slot_idx"], banner_image)
+                gen_icon_for_entry(entry, slot_size, slot_pos, (arrow_w, arrow_h), img, item["slot_idx"])
         
         # Current entry number (People icon)
         draw_entry_number(img, count)
@@ -115,14 +119,14 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
         class_name = f"fortgrub{current_id}"
         
         # 3. Inject into the JSON entry and save it to the config
-        entries[i]["injected_class"] = class_name
+        entries[i]["id"] = class_name
         
         with open(THEME_CONFIG_PATH, 'w') as f:
             json.dump(config, f, indent=4)
 
 
         clean_filename = f"{class_name}.png"
-        save_image(img, clean_filename, output_path=THEME_DIR + f"/icons/")
+        save_image(img, clean_filename, output_path=CACHED_DIR)
 
         # For debugging purposes
         #debug_filename = f"menu_{menu_id}_selected_{i + 1}.png"
@@ -133,7 +137,7 @@ def render_menu_level(entries, base_image, arrow_icon, banner_image, menu_id="ro
     for idx, entry in enumerate(entries):
         if entry.get("children"):
             sub_id = f"{menu_id}_{idx + 1}"
-            render_menu_level(entry["children"], base_image, arrow_icon, banner_image, sub_id, global_counter, config)
+            render_menu_level(entry["children"], base_image, arrow_icon, sub_id, global_counter, config)
 
 def draw_entry_number(img, count):
     font_path = os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf")
@@ -154,7 +158,7 @@ def draw_entry_number(img, count):
     draw.text(position, text, font=font, fill="white", anchor="lm")
 
 
-def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx, banner_image):
+def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
 
     icon = get_icon_for_classes(entry.get('class', []), slot_size)
     arrow_w, arrow_h = arrow_size
@@ -222,12 +226,22 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx, ba
 
     # Draw main banner
     if slot_idx == 0:
-        # Resize banner image to 40x50
-        banner_image = banner_image.resize((40, 50))
-        img.paste(banner_image, banner_pos, banner_image)
+        img,banner_image = add_banner(img, entry)
     else:
-        # random banner TODO
-        pass 
+        banner_image = gen_base_banner(entry.get("banner", {}))
+    
+    # Draw level text on banner NOT WORKING GG
+    if slot_idx == 0:
+        img = add_level_text(img, entry)
+
+    # Draw banner on top of the entry icon
+    # Resize banner image to 40x50
+    banner_image = banner_image.resize((40, 50))
+    img.paste(banner_image, banner_pos, banner_image)
+
+    
+
+
 
 def draw_dashed_line(img, start_pos, min_width, font, text, text_start_x):
     text_width = font.getlength(text)
@@ -310,12 +324,12 @@ def create_detailed_segment(color=(255, 255, 255)):
     return img
 
 
-def generate_final_images(config, base_image, banner_image):
+def generate_final_images(config, base_image):
     print("⏳ Loading Arrow Resources...")
     arrow_icon = load_image(ARROW_ICON_PATH)
 
-    entries = config.get("menu-entries", [])
+    entries = config.get("entries", [])
     print(f"Processing {len(entries)} root entries...")
-    render_menu_level(entries, base_image, arrow_icon, banner_image, "root", [0], config)
+    render_menu_level(entries, base_image, arrow_icon, "root", [0], config)
     print("✅ Theme generation complete.")
 

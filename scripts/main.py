@@ -9,7 +9,7 @@ def main():
 
     parser_update = subparsers.add_parser("setup-theme", help="Setup theme files")
     parser_update.add_argument("--verbose", "-v", action="store_true", help="Show detailed logs")
-
+    parser_generate = subparsers.add_parser("generate-theme", help="Generate theme files")
     args = parser.parse_args()
 
     if args.command == "setup-theme":
