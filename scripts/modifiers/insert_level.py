@@ -199,12 +199,35 @@ def add_level_details(img, entry):
 
         level_star_pos_second = (level_star_pos_first[0], level_star_pos_first[1] + level_star_icon.height + 7)
         img.paste(level_star_icon, level_star_pos_second, level_star_icon)
+    
+        next_level_milestone = (level // 5 + 1) * 5
+
+        # Add yellow text next to arrows
+        n_star_first = "2"
+        n_star_second = "10" if next_level_milestone % 10 == 0 else "5"
+
+        n_star_x = level_star_pos_first[0] + level_star_icon.width + 4        
+        n_star_first_pos = (n_star_x, reference_point[1] + 1)
+        
+        draw = ImageDraw.Draw(img)
+        font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 23.5)
+
+        (_, top, _, bottom) = font.getbbox(n_star_first)
+
+        color = "#fff19d"
+        draw.text((n_star_first_pos[0], n_star_first_pos[1] - top), str(n_star_first), font=font, fill=color)
+
+        offset_y_text = bottom - top
+
+        (_, top, _, _) = font.getbbox(n_star_second)
+
+        draw.text((n_star_first_pos[0], n_star_first_pos[1] + offset_y_text + 20 - top), str(n_star_second), font=font, fill=color)
+
 
         return
         milestone_font = ImageFont.truetype(os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf"), 32)
 
         # Get next level milestone
-        next_level_milestone = str((level // 5 + 1) * 5)
         print(f"Current Level: {level}, Next Milestone: {next_level_milestone}")
 
         milestone_pos = (360, 361)
