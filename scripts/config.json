@@ -54,7 +54,7 @@
                         "os"
                     ],
                     "children": [],
-                    "level": 100,
+                    "level": 1000,
                     "banner": {
                         "color": "Red",
                         "icon": "StandardBanner31.png"

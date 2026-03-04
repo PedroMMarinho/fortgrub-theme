@@ -207,9 +207,29 @@ def add_level_details(img, entry):
 
     if level >= 100:
         progress_width = 238
-        # TODO
-        pass
-        # Put Max text with green progress bar
+        
+        progress_bar = create_progress_bar(100.0, progress_width)
+
+        bar_pos = (reference_point[0], reference_point[1] - 8)
+        img.paste(progress_bar, bar_pos, progress_bar)
+        
+        font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 21)
+        text = "MAX"
+        
+        (left, top, right, bottom) = font.getbbox(text)
+        
+        text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        overlay_draw = ImageDraw.Draw(text_overlay)
+        color_max = (255, 255, 255, 204)
+        
+        text_x = bar_pos[0] + 1
+        
+        target_bottom_y = bar_pos[1] - 2
+        draw_y_max = target_bottom_y - bottom
+        
+        overlay_draw.text((text_x, draw_y_max), text, font=font, fill=color_max)
+        
+        img.paste(text_overlay, (0, 0), text_overlay)
     else:
         progress_width = 148
         
