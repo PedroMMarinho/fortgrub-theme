@@ -199,7 +199,7 @@ def get_og_max_xp(level):
 def add_level_details(img, entry):
     level = entry.get("level", 1)
     # Percentage from 0 to 100 for the progress bar
-    progress = entry.get("progress", 0)
+    progress = entry.get("xp-progress", 0)
     # Clamp value
     progress = max(0.0, min(99.99, float(progress)))
 

@@ -2,6 +2,7 @@
     "vbucks": 1434,
     "background": "Batman.png",
     "progress-bar-emoticon": "Emoji_Ace.png",
+    "season": 10,
     "entries": [
         {
             "name": "Champion of Ash",
@@ -14,10 +15,19 @@
             ],
             "children": [],
             "level": 2,
-            "progress": 120,
+            "xp-progress": 120,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
+            },
+            "battlepass": {
+                "tier": 10,
+                "stars": 5,
+                "mission": {
+                    "description": "Complete 3 matches in any mode",
+                    "current-stars": 0,
+                    "total-stars": 300
+                }
             },
             "id": "fortgrub1"
         },

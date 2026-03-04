@@ -6,6 +6,7 @@ from PIL import Image, ImageOps, ImageDraw
 from helpers.utils import save_image, ICONS_DIR, IMAGES_DIR, CACHED_DIR, FONTS_DIR, load_image, load_font, THEME_CONFIG_PATH
 from scripts.modifiers.insert_banner import add_banner, gen_base_banner
 from scripts.modifiers.insert_level import add_level_text, add_level_details
+from scripts.modifiers.insert_battlepass import add_battle_pass_details
 
 LAYOUT_CONFIG = [
     {"pos": (922, 632),  "size": (300, 300)}, 
@@ -243,6 +244,10 @@ def gen_icon_for_entry(entry, slot_size, slot_pos, arrow_size, img, slot_idx):
 
         # Compute level logic (Stars and green bar)
         add_level_details(img, entry)
+
+    # Battle Pass Tier + Stars + Mission
+    if slot_idx == 0:
+        add_battle_pass_details(img, entry)
 
     
 

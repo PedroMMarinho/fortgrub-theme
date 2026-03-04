@@ -1,8 +1,17 @@
 {
     "level": 100,
-    "progress": 20,
+    "xp-progress": 20,
     "banner": {
         "color": "Red",
         "icon": "StandardBanner31.png"
+    },
+    "battlepass": {
+        "tier": 89,
+        "stars": 5,
+        "mission": {
+            "description": "Complete 3 matches in any mode",
+            "current-stars": 0,
+            "total-stars": 300
+        }
     }
 }
