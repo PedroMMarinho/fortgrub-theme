@@ -294,11 +294,11 @@ def add_level_details(img, entry):
         (left_mile, top_mile, right_mile, _) = font.getbbox(milestone_str)
         mile_width = right_mile - left_mile
 
-        #  Calculate exact starting X coordinate to guarantee a 7px gap
+        #  Calculate exact starting X coordinate to guarantee a 6px gap
         # Total block size = [LVL width] + [4px gap] + [Milestone width]
         total_text_width = lvl_width + 4 + mile_width
         
-        start_x = arrow_pos_second[0] - 7 - total_text_width
+        start_x = arrow_pos_second[0] - 6 - total_text_width
         
         base_y = reference_point[1] + 33
 

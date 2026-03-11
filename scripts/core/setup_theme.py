@@ -30,6 +30,29 @@ def run():
     config["background"] = background
     config["progress-bar-emoticon"] = progress_bar_emoticon
     config["season"] = 3
+    
+    config["missions"] = {
+        "battlepass" : {
+            "description": "I Use Arch btw",
+            "current-stars": 1,
+            "total-stars": 1
+        },
+        "daily1" : {
+            "description": "Search 7 Chests in Risky Reels",
+            "current-stars": 1,
+            "total-stars": 7
+        },
+        "daily2" : {
+            "description": "I Use Arch btw",
+            "current-stars": 2,
+            "total-stars": 3
+        },
+        "daily3" : {
+            "description": "Get a low taper fade (It's still massive)",
+            "current-stars": 0,
+            "total-stars": 1
+        },
+    }
 
     config["entries"] = entries
 

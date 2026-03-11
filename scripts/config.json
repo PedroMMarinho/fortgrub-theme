@@ -1,8 +1,30 @@
 {
-    "vbucks": 1434,
+    "vbucks": 1435,
     "background": "Batman.png",
     "progress-bar-emoticon": "Emoji_Ace.png",
-    "season": 10,
+    "season": 3,
+    "missions": {
+        "battlepass": {
+            "description": "Search Chests in Snobby Shores",
+            "current-stars": 1,
+            "total-stars": 1
+        },
+        "daily1": {
+            "description": "Shotgun Eliminations",
+            "current-stars": 1,
+            "total-stars": 7
+        },
+        "daily2": {
+            "description": "I Use Arch btw",
+            "current-stars": 2,
+            "total-stars": 3
+        },
+        "daily3": {
+            "description": "Get a low taper fade (It's still massive)",
+            "current-stars": 0,
+            "total-stars": 1
+        }
+    },
     "entries": [
         {
             "name": "Champion of Ash",
@@ -14,20 +36,15 @@
                 "os"
             ],
             "children": [],
-            "level": 2,
-            "xp-progress": 120,
+            "level": 90,
+            "xp-progress": 20,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
             },
             "battlepass": {
-                "tier": 10,
-                "stars": 5,
-                "mission": {
-                    "description": "Complete 3 matches in any mode",
-                    "current-stars": 0,
-                    "total-stars": 300
-                }
+                "tier": 89,
+                "stars": 5
             },
             "id": "fortgrub1"
         },
@@ -39,10 +56,15 @@
                 "os"
             ],
             "children": [],
-            "level": 25,
+            "level": 100,
+            "xp-progress": 20,
             "banner": {
-                "color": "Blue",
-                "icon": "Banner_ClaimReflect.png"
+                "color": "Red",
+                "icon": "StandardBanner31.png"
+            },
+            "battlepass": {
+                "tier": 89,
+                "stars": 5
             },
             "id": "fortgrub2"
         },
@@ -64,10 +86,15 @@
                         "os"
                     ],
                     "children": [],
-                    "level": 1000,
+                    "level": 100,
+                    "xp-progress": 20,
                     "banner": {
                         "color": "Red",
                         "icon": "StandardBanner31.png"
+                    },
+                    "battlepass": {
+                        "tier": 89,
+                        "stars": 5
                     },
                     "id": "fortgrub5"
                 },
@@ -82,17 +109,27 @@
                     ],
                     "children": [],
                     "level": 100,
+                    "xp-progress": 20,
                     "banner": {
                         "color": "Red",
                         "icon": "StandardBanner31.png"
+                    },
+                    "battlepass": {
+                        "tier": 89,
+                        "stars": 5
                     },
                     "id": "fortgrub6"
                 }
             ],
             "level": 100,
+            "xp-progress": 20,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
+            },
+            "battlepass": {
+                "tier": 89,
+                "stars": 5
             },
             "id": "fortgrub3"
         },
@@ -105,9 +142,14 @@
             ],
             "children": [],
             "level": 100,
+            "xp-progress": 20,
             "banner": {
                 "color": "Red",
                 "icon": "StandardBanner31.png"
+            },
+            "battlepass": {
+                "tier": 89,
+                "stars": 5
             },
             "id": "fortgrub4"
         }
