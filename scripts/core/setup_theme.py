@@ -71,31 +71,6 @@ def run():
     print("Checkout the config.json file to customize the theme how you want !!!")
     print("When statisfied with the config, run 'make generate' to create the theme")
 
-    # LOAD BASE IMAGE
-    #base_image = load_image(BASE_IMAGE)
-
-    # Add background to base image
-    #current_image = add_background(base_image, config)
-
-    # Add banner image
-    #current_image, banner_img = add_banner(current_image, config)
-
-    # Add vbucks info
-    #current_image = add_vbucks(current_image, config)
-
-    # Add level text
-    #current_image = add_level_text(current_image, config)
-
-    # Change progress bar emoticon
-    #change_emoticon(config)
-
-    #save_image(current_image, "test.png")
-
-    # Generate final images
-    #generate_final_images(config, current_image, banner_img)
-
-    # TODO - Change grub.cfg or other file to have the class of that entry as the injected one. (e.g., fortgrub1, fortgrub2, etc)
-
 
 def apply_defaults(entries, default_config):
     for entry in entries:

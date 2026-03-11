@@ -2,11 +2,11 @@ desktop-color: "#000000"
 title-text: ""
 
 
-terminal-font: ""
-terminal-left: "18%+4"
-terminal-top: "21%+4"
-terminal-width: "63%+11"
-terminal-height: "63%+8"
+terminal-box: "term_*.png"
+terminal-left: "25%"
+terminal-top: "25%"
+terminal-width: "60%"
+terminal-height: "60%"
 
 + progress_bar {
     id = "__timeout__"
