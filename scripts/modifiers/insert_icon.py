@@ -334,12 +334,12 @@ def create_detailed_segment(color=(255, 255, 255)):
     return img
 
 
-def generate_final_images(config, base_image):
+def generate_cached_final_images(config, base_image):
     print("⏳ Loading Arrow Resources...")
     arrow_icon = load_image(ARROW_ICON_PATH)
 
     entries = config.get("entries", [])
     print(f"Processing {len(entries)} root entries...")
     render_menu_level(entries, base_image, arrow_icon, "root", [0], config)
-    print("✅ Theme generation complete.")
+    print("✅ Cached Images Stored Successfully.")
 

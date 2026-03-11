@@ -21,7 +21,7 @@ def add_background(base_image, config):
     new_w = base_w
     new_h = int(bg_h * scale_factor)
     
-    print(f"📏 Resizing background from {bg_w}x{bg_h} to {new_w}x{new_h}")
+    #print(f"📏 Resizing background from {bg_w}x{bg_h} to {new_w}x{new_h}")
 
     resized_bg = background_image.resize((new_w, new_h), Image.Resampling.LANCZOS)
 
@@ -35,6 +35,6 @@ def add_background(base_image, config):
     
     final_image = Image.alpha_composite(canvas, base_image)
     
-    print("✅ Composited background and base image.")
+    #print("✅ Composited background and base image.")
     
     return final_image

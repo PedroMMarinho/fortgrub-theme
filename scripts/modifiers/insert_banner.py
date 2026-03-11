@@ -122,7 +122,7 @@ def draw_border(base_image, center_x, center_y, level):
         
         base_image.paste(border_img, (paste_x, paste_y), border_img)
     else:
-        print(f"⚠️ Warning: Border image for level {level} not found at {file_path}. Using level 0 fallback.")
+        #print(f"⚠️ Warning: Border image for level {level} not found at {file_path}. Using level 0 fallback.")
         fallback_path = os.path.join(BANNERS_DIR, "borders", "banner_border_0.png")
         fallback_img = load_image(fallback_path)
 

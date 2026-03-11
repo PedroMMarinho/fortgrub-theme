@@ -31,4 +31,4 @@ def change_emoticon(config):
     output_path = os.path.join(PROJECT_ROOT, "theme", "progress_highlight_e.png")
     highlight_template.save(output_path)
     
-    print(f"✅ Emoticon '{filename}' inserted into highlight template and saved to {output_path}")
+    print(f"✅ Emoticon '{filename}' inserted into highlight template")
