@@ -7,14 +7,15 @@ def add_missions(config, img):
     missions = config.get("missions", {})
     star_icon = load_image(os.path.join(IMAGES_DIR, "level-star-exp.png")).convert("RGBA")
     arrow_icon = load_image(os.path.join(IMAGES_DIR, "level-arrow.png")).convert("RGBA")
+    xp_icon = load_image(os.path.join(IMAGES_DIR, "xp-banner.png")).convert("RGBA")
 
     for mission_type, mission_info in missions.items():
-        add_mission(mission_type, img, mission_info, star_icon, arrow_icon)
+        add_mission(mission_type, img, mission_info, star_icon, arrow_icon, xp_icon)
 
     return img
 
 
-def add_mission(mission_type, img, config, star_icon, arrow_icon): 
+def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon): 
     # Initialize the drawing context
     draw = ImageDraw.Draw(img)
     
@@ -50,7 +51,7 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon):
     
     # --- STEP 2: Draw Star Number and Icon ---
     font_star = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21)
-    star_number_text = "5"
+    star_number_text = str(config.get("star-reward", 2))
     star_number_color = "#fff19d"
     
     (left, top, right, bottom) = font_star.getbbox(star_number_text)
@@ -74,27 +75,120 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon):
     star_icon_y = int(star_center_y - (star_icon.height / 2))
     
     img.paste(star_icon, (int(star_icon_x), star_icon_y), star_icon)
-    # --- STEP 3: Draw Arrow Icon ---
+    # --- STEP 3: Draw XP Parts ---
+    anchor_x = star_icon_x
+
+    if is_daily:
+        exp_text = str(config.get("xp-reward", 500))
+        font_exp = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21.1)
+        exp_color = "#f1ffb7"
+        
+        (e_left, e_top, e_right, e_bottom) = font_exp.getbbox(exp_text)
+        exp_width = e_right - e_left
+        
+        # Position: 6 px left of the star icon (our current anchor)
+        exp_x = anchor_x - 6 - exp_width
+        exp_y = ref_point[1] + 43 - e_top
+        
+        text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        overlay_draw = ImageDraw.Draw(text_overlay)
+        overlay_draw.text((exp_x, exp_y), exp_text, font=font_exp, fill=exp_color)
+        img.paste(text_overlay, (0, 0), text_overlay)
+        
+        # 2. XP Icon: 7 px left of the text
+        xp_icon_x = exp_x - 7 - xp_icon.width
+        xp_icon_y = int(star_center_y - (xp_icon.height / 2))
+        
+        img.paste(xp_icon, (int(xp_icon_x), xp_icon_y), xp_icon)
+        
+        anchor_x = xp_icon_x
+        
+
+    # --- STEP 4: Draw Arrow Icon ---
     # Distance is 7 px to the left of the star icon
-    arrow_icon_x = star_icon_x - 7 - arrow_icon.width
+    offset_arrow = 7 if not is_daily else 11
+    arrow_icon_x = anchor_x - offset_arrow - arrow_icon.width
     arrow_icon_y = int(star_center_y - (arrow_icon.height / 2))
     
     colored_arrow = Image.new("RGBA", arrow_icon.size, "#3c435d")
     
     img.paste(colored_arrow, (int(arrow_icon_x), arrow_icon_y), arrow_icon)
-    # ------------------------------
-    # TODO
-    # Then draw the current-stars/total-stars 7 px to the left. 
-    # For the numbers use font with 21.1
-    # For the slash use font with 30
-    # Center the numbers around the slash
-    # Distance from slash to number on the rigth is 4 px and to the left 6 px
+   # --- STEP 5: Current/Total Stars ---
+    font_numbers = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21.1)
+    font_slash = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 30)
 
-    font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21.1)
+    current_stars_text = str(config.get("current-stars", 3)) 
+    total_stars_text = str(config.get("total-stars", 5))
 
-    font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 30)
+    text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    overlay_draw = ImageDraw.Draw(text_overlay)
+    text_color = "#ffffff"
 
+    # 1. Total Stars (7 px left of the arrow)
+    (n_left, n_top, n_right, n_bottom) = font_numbers.getbbox(total_stars_text)
+    total_w = n_right - n_left
+    total_h = n_bottom - n_top
+    
+    total_x = arrow_icon_x - 7 - total_w
+    
+    total_y = ref_point[1] + 43 - n_top
+    
+    center_y = (ref_point[1] + 43) + (total_h / 2)
 
-    # Draw rectangle of 3 px border 3c435d color and fill with 00001d, width will be dynamic
-    # Distanced to the rigth number by 8 px.
-    # Should have the remaining width, with spacing of 16 px to the left of the container. Height should be 44 px down from the top.
+    overlay_draw.text((total_x, total_y), total_stars_text, font=font_numbers, fill=text_color)
+
+    (s_left, s_top, s_right, s_bottom) = font_slash.getbbox("/")
+    slash_w = s_right - s_left
+    slash_h = s_bottom - s_top
+    
+    slash_x = total_x - 4 - slash_w
+    
+    slash_top_ink = center_y - (slash_h / 2)
+    slash_y = slash_top_ink - s_top 
+    
+    overlay_draw.text((slash_x, slash_y), "/", font=font_slash, fill=text_color)
+
+    (c_left, c_top, c_right, c_bottom) = font_numbers.getbbox(current_stars_text)
+    current_w = c_right - c_left
+    
+    current_x = slash_x - 6 - current_w
+    current_y = ref_point[1] + 43 - c_top
+    
+    overlay_draw.text((current_x, current_y), current_stars_text, font=font_numbers, fill=text_color)
+
+    img.paste(text_overlay, (0, 0), text_overlay)
+    # --- STEP 6: Draw Progress Bar Rectangle ---
+    rect_right_x = current_x - 8
+    rect_left_x = ref_point[0] + 16
+    rect_y_top = ref_point[1] + 44
+    bar_height = 12 
+    rect_y_bottom = rect_y_top + bar_height
+
+    # 1. Draw the background/border rectangle
+    draw.rectangle(
+        [rect_left_x, rect_y_top, rect_right_x, rect_y_bottom],
+        fill="#00001d",
+        outline="#3c435d",
+        width=3
+    )
+    
+    current_val = float(current_stars_text)
+    total_val = float(total_stars_text)
+    
+    if total_val > 0 and current_val > 0:
+        current_val = min(current_val, total_val)
+        progress_ratio = current_val / total_val
+        
+        inner_left = rect_left_x + 3
+        inner_top = rect_y_top + 3
+        inner_bottom = rect_y_bottom - 3
+        max_inner_right = rect_right_x - 3
+        
+        max_inner_width = max_inner_right - inner_left
+        fill_width = max_inner_width * progress_ratio
+        inner_right = inner_left + fill_width
+        
+        draw.rectangle(
+            [inner_left, inner_top, inner_right, inner_bottom],
+            fill="#c6ff28"
+        )

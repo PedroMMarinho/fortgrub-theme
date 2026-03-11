@@ -33,24 +33,33 @@ def run():
     
     config["missions"] = {
         "battlepass" : {
-            "description": "I Use Arch btw",
+            "description": "I Use Arch btw ...",
             "current-stars": 1,
-            "total-stars": 1
+            "total-stars": 1,
+            "star-reward": 10,
         },
         "daily1" : {
             "description": "Search 7 Chests in Risky Reels",
             "current-stars": 1,
-            "total-stars": 7
+            "total-stars": 7,
+            "star-reward": 5,
+            "xp-reward": 500
+
         },
         "daily2" : {
-            "description": "I Use Arch btw",
-            "current-stars": 2,
-            "total-stars": 3
+            "description": "Get a low taper fade, it's still massive",
+            "current-stars": 0,
+            "total-stars": 1,
+            "star-reward": 5,
+            "xp-reward": 1000
+
         },
         "daily3" : {
-            "description": "Get a low taper fade (It's still massive)",
-            "current-stars": 0,
-            "total-stars": 1
+            "description": "Eliminate 3 opponents in Tilted Towers",
+            "current-stars": 2,
+            "total-stars": 3,
+            "star-reward": 5,
+            "xp-reward": 500
         },
     }
 
