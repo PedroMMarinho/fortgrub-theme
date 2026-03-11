@@ -11,7 +11,6 @@ def run():
     # Load main config
     config = load_config()
     
-
     # Load base image
     base_image = load_image(BASE_IMAGE)
 

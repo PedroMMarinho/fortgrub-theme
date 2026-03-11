@@ -8,7 +8,7 @@ def run():
     print("Starting Theme Setup ...")
 
     # Load main config
-    config = load_config()
+    config = {}
 
     # Load entries config and parse grub.cfg
     entries_config = load_config(ENTRIES_CONFIG_PATH)
