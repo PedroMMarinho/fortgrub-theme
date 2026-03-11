@@ -15,3 +15,7 @@ setup:
 generate:
 	@echo "🎮 Generating Fortnite GRUB theme"
 	sudo -E PYTHONPATH=. $(PYTHON_BIN) $(MAIN_SCRIPT) generate-theme
+
+update:
+	@echo "🎮 Updating Fortnite GRUB theme"
+	sudo -E PYTHONPATH=. $(PYTHON_BIN) $(MAIN_SCRIPT) update-theme

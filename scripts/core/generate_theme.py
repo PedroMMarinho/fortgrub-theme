@@ -32,3 +32,5 @@ def run():
     generate_icon_final_images(config)
 
     print("Theme generation completed successfully!")
+    print("Now add manually the classes to the grub.cfg or your custom grub files (Checkout wiki for more info)")
+    print("After that your theme is ready, enjoy :)")
