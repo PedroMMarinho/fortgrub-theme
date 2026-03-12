@@ -5,8 +5,8 @@ title-text: ""
 terminal-box: "term_*.png"
 terminal-left: "25%"
 terminal-top: "25%"
-terminal-width: "60%"
-terminal-height: "60%"
+terminal-width: "50%"
+terminal-height: "50%"
 
 + progress_bar {
     id = "__timeout__"
