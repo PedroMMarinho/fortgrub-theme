@@ -211,7 +211,7 @@ def add_level_details(img, entry):
         progress_bar = create_progress_bar(100.0, progress_width)
 
         bar_pos = (reference_point[0], reference_point[1] - 8)
-        img.paste(progress_bar, bar_pos, progress_bar)
+        img.alpha_composite(progress_bar, dest=bar_pos)
         
         font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 21)
         text = "MAX"
@@ -229,13 +229,13 @@ def add_level_details(img, entry):
         
         overlay_draw.text((text_x, draw_y_max), text, font=font, fill=color_max)
         
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
     else:
         progress_width = 148
         
         progress_bar = create_progress_bar(progress,progress_width)
 
-        img.paste(progress_bar, reference_point, progress_bar)
+        img.alpha_composite(progress_bar, dest=reference_point)
 
         # Put arrow icon on the right of the progress bar
         arrow_icon = load_image(os.path.join(IMAGES_DIR, "level-arrow.png"))
@@ -244,10 +244,10 @@ def add_level_details(img, entry):
         arrow_pos_y = reference_point[1] + 1
 
         arrow_pos_first = (arrow_pos_x, arrow_pos_y)
-        img.paste(arrow_icon, arrow_pos_first, arrow_icon)
+        img.alpha_composite(arrow_icon, dest=arrow_pos_first)
 
         arrow_pos_second = (arrow_pos_x, arrow_pos_y + 20 + arrow_icon.height)
-        img.paste(arrow_icon, arrow_pos_second, arrow_icon)
+        img.alpha_composite(arrow_icon, dest=arrow_pos_second)
 
 
         # Load star battle pass icon
@@ -255,10 +255,10 @@ def add_level_details(img, entry):
 
         level_star_pos_first = (arrow_pos_x + 8 + arrow_icon.width, reference_point[1] - 5)
 
-        img.paste(level_star_icon, level_star_pos_first, level_star_icon)
+        img.alpha_composite(level_star_icon, dest=level_star_pos_first)
 
         level_star_pos_second = (level_star_pos_first[0], level_star_pos_first[1] + level_star_icon.height + 7)
-        img.paste(level_star_icon, level_star_pos_second, level_star_icon)
+        img.alpha_composite(level_star_icon, dest=level_star_pos_second)
     
         next_level_milestone = (level // 5 + 1) * 5
 
@@ -315,7 +315,7 @@ def add_level_details(img, entry):
         mile_target_pos = (start_x + lvl_width + 4, base_y - top_mile)
         overlay_draw.text(mile_target_pos, milestone_str, font=font, fill=color_milestone)
 
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
 
         # Add XP text below the progress bar
         needed_xp = get_og_max_xp(level)
@@ -369,4 +369,4 @@ def add_level_details(img, entry):
         needed_x = slash_x + bar_width + 2
         overlay_draw.text((needed_x, draw_y_numbers), needed_xp_str, font=font_regular_small, fill=color_xp_needed)
 
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)

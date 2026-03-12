@@ -47,7 +47,7 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon):
         text_y = text_position[1] - top + 1
         
         overlay_draw.text((text_x, text_y), draw_title, font=font, fill=title_color)
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
     
     # --- STEP 2: Draw Star Number and Icon ---
     font_star = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21)
@@ -67,14 +67,14 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon):
     overlay_draw = ImageDraw.Draw(text_overlay)
     
     overlay_draw.text(star_number_position, star_number_text, font=font_star, fill=star_number_color)
-    img.paste(text_overlay, (0, 0), text_overlay)
+    img.alpha_composite(text_overlay)
 
     star_icon_x = star_number_x - 4 - star_icon.width
     
     star_center_y = ref_point[1] + 43 + (text_height / 2)
     star_icon_y = int(star_center_y - (star_icon.height / 2))
     
-    img.paste(star_icon, (int(star_icon_x), star_icon_y), star_icon)
+    img.alpha_composite(star_icon, dest=(int(star_icon_x), star_icon_y))
     # --- STEP 3: Draw XP Parts ---
     anchor_x = star_icon_x
 
@@ -93,13 +93,13 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon):
         text_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
         overlay_draw = ImageDraw.Draw(text_overlay)
         overlay_draw.text((exp_x, exp_y), exp_text, font=font_exp, fill=exp_color)
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
         
         # 2. XP Icon: 7 px left of the text
         xp_icon_x = exp_x - 7 - xp_icon.width
         xp_icon_y = int(star_center_y - (xp_icon.height / 2))
         
-        img.paste(xp_icon, (int(xp_icon_x), xp_icon_y), xp_icon)
+        img.alpha_composite(xp_icon, dest=(int(xp_icon_x), xp_icon_y))
         
         anchor_x = xp_icon_x
         
@@ -111,8 +111,9 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon):
     arrow_icon_y = int(star_center_y - (arrow_icon.height / 2))
     
     colored_arrow = Image.new("RGBA", arrow_icon.size, "#3c435d")
-    
-    img.paste(colored_arrow, (int(arrow_icon_x), arrow_icon_y), arrow_icon)
+    colored_arrow.putalpha(arrow_icon.getchannel("A"))
+
+    img.alpha_composite(colored_arrow, dest=(int(arrow_icon_x), arrow_icon_y))
    # --- STEP 5: Current/Total Stars ---
     font_numbers = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 21.1)
     font_slash = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Regular.ttf"), 30)
@@ -156,7 +157,7 @@ def add_mission(mission_type, img, config, star_icon, arrow_icon, xp_icon):
     
     overlay_draw.text((current_x, current_y), current_stars_text, font=font_numbers, fill=text_color)
 
-    img.paste(text_overlay, (0, 0), text_overlay)
+    img.alpha_composite(text_overlay)
     # --- STEP 6: Draw Progress Bar Rectangle ---
     rect_right_x = current_x - 8
     rect_left_x = ref_point[0] + 16

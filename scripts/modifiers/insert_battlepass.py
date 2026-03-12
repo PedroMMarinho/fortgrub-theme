@@ -30,7 +30,7 @@ def add_battle_pass_details(img, entry):
     # Draw Shinning star and star count
     position = (379 - 14, 427 - 11)
     star_icon = Image.open(os.path.join(IMAGES_DIR, "battlepass-star.png")).convert("RGBA")
-    img.paste(star_icon, position, star_icon)
+    img.alpha_composite(star_icon, dest=position)
 
     # Battle Pass
     battlepass_font = ImageFont.truetype(os.path.join(FONTS_DIR, "NotoSans", "NotoSans-Bold.ttf"), 24)
@@ -48,7 +48,7 @@ def add_battle_pass_details(img, entry):
         text_y = battlepass_text_pos[1] - top
         overlay_draw.text((text_x, text_y), battlepass_text, font=battlepass_font, fill=battlepass_color)
 
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
     else:
         # Threshold stars to be strictly between 0 and 9
         current_stars = max(0, min(9, int(stars)))
@@ -108,5 +108,5 @@ def add_battle_pass_details(img, entry):
         overlay_draw.text((x_max, draw_y_numbers), str_max, font=font_numbers, fill=color_opacity)
         
         # Stamp the transparent layer onto the main image
-        img.paste(text_overlay, (0, 0), text_overlay)
+        img.alpha_composite(text_overlay)
 

@@ -120,7 +120,7 @@ def draw_border(base_image, center_x, center_y, level):
         paste_x = center_x - (border_w // 2)
         paste_y = center_y - (border_h // 2)
         
-        base_image.paste(border_img, (paste_x, paste_y), border_img)
+        base_image.alpha_composite(border_img, dest=(paste_x, paste_y))
     else:
         #print(f"⚠️ Warning: Border image for level {level} not found at {file_path}. Using level 0 fallback.")
         fallback_path = os.path.join(BANNERS_DIR, "borders", "banner_border_0.png")
@@ -131,7 +131,7 @@ def draw_border(base_image, center_x, center_y, level):
 
             paste_x = center_x - (fallback_w // 2)
             paste_y = center_y - (fallback_h // 2)
-            base_image.paste(fallback_img, (paste_x, paste_y), fallback_img)
+            base_image.alpha_composite(fallback_img, dest=(paste_x, paste_y))
 
     # Debug - Draw a red rectangle around the banner area to visualize the center and size (for development purposes)
     #draw = ImageDraw.Draw(base_image)
@@ -184,8 +184,9 @@ def apply_inner_border(banner_img, border_width=3, darkness_factor=0.6):
     final_mask = Image.new("L", (w, h), 0)
     final_mask.paste(border_mask, (0, 0), original_alpha)
 
+    dark_clone.putalpha(final_mask)
     result_img = banner_img.copy()
-    result_img.paste(dark_clone, (0, 0), final_mask)
+    result_img.alpha_composite(dark_clone)
     
     return result_img
 
@@ -211,7 +212,7 @@ def gen_base_banner(banner_info):
     pos_x = (bg_w - icon_w) // 2
     pos_y = (bg_h - icon_h) // 2 
     
-    banner_img.paste(icon_img, (pos_x, pos_y), icon_img)
+    banner_img.alpha_composite(icon_img, dest=(pos_x, pos_y))    
     
     banner_img.putalpha(banner_mask)
 
@@ -229,7 +230,7 @@ def add_banner(base_image, config):
     # Banner with border darkened for better contrast against the background
     banner_to_paste = apply_inner_border(banner_img, border_width=2, darkness_factor=0.86)
 
-    base_image.paste(banner_to_paste, banner_position, banner_img)
+    base_image.alpha_composite(banner_to_paste, dest=banner_position)
     
     banner_width, banner_height = banner_to_paste.size
     

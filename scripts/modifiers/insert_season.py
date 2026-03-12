@@ -10,7 +10,7 @@ def insert_season(config, base_image):
     font_path = os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf")
     season_font = ImageFont.truetype(font_path, 32)
 
-    season_position = (47, 168)
+    season_position = (48, 168)
 
     (left, top, right, bottom) = season_font.getbbox(season_string)
     
@@ -23,7 +23,7 @@ def insert_season(config, base_image):
     text_y = season_position[1] - top
     overlay_draw.text((text_x, text_y), season_string, font=season_font, fill=season_color)
 
-    base_image.paste(text_overlay, (0, 0), text_overlay)
+    base_image.alpha_composite(text_overlay)
     
     return base_image
 
