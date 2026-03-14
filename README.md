@@ -23,6 +23,9 @@ This theme will only have manual instalation:
 
 Before you proceed, go to the [Fort Grub Wiki](https://github.com/PedroMMarinho/fortgrub-theme/wiki) to understand how to configure and generate the theme!
 
+Check `theme.txt` for the resolution of your screen!!!
+  - The default comes as 1920x1080. Just change the **icon_width**, **icon_height** and **item_height**.
+
 After that you can:
 
 - **Check your GRUB directory:**
