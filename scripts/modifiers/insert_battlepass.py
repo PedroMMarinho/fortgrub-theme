@@ -10,10 +10,6 @@ def add_battle_pass_details(img, entry):
     
     tier = battlepass_info.get("tier", 0)
     stars = battlepass_info.get("stars", 0)
-    mission = battlepass_info.get("mission", {})
-    mission_desc = mission.get("description", "")
-    current_stars = mission.get("current-stars", 0)
-    total_stars = mission.get("total-stars", 0)
 
     draw = ImageDraw.Draw(img)
 

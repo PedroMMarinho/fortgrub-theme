@@ -1,5 +1,6 @@
 __pycache__
 venv/
 scripts/config.json
-theme/icons/*.png
-theme/cached/*.png
+fortgrub/icons/*.png
+fortgrub/cached/*.png
+scripts/jsons/entries.json

@@ -1,4 +1,4 @@
-from helpers.utils import load_image, EMOTICONS_DIR, PROJECT_ROOT
+from helpers.utils import load_image, EMOTICONS_DIR, THEME_DIR
 import os
 from PIL import Image
 
@@ -15,7 +15,7 @@ def change_emoticon(config):
     if bbox:
         emoticon = emoticon.crop(bbox)
 
-    template_path = os.path.join(PROJECT_ROOT, "theme", "template", "progress_highlight_e.png")
+    template_path = os.path.join(THEME_DIR, "template", "progress_highlight_e.png")
     highlight_template = load_image(template_path)
 
     scale = 64.0 / max(emoticon.width, emoticon.height)
@@ -28,7 +28,7 @@ def change_emoticon(config):
 
     highlight_template.paste(emoticon, (x, y), emoticon)
 
-    output_path = os.path.join(PROJECT_ROOT, "theme", "progress_highlight_e.png")
+    output_path = os.path.join(THEME_DIR , "progress_highlight_e.png")
     highlight_template.save(output_path)
     
     print(f"✅ Emoticon '{filename}' inserted into highlight template")

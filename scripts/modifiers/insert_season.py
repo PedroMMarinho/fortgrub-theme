@@ -4,8 +4,8 @@ from scripts.helpers.utils import FONTS_DIR, load_font
 
 
 def insert_season(config, base_image):
-    season = config.get("season", 0)
-    season_string = f"SEASON {season}"
+    season = config.get("season", "0")
+    season_string = f"SEASON " + season
     
     font_path = os.path.join(FONTS_DIR, "Burbank", "BurbankBigCondensed-Black.otf")
     season_font = ImageFont.truetype(font_path, 32)

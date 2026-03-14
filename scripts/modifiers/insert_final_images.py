@@ -24,7 +24,7 @@ def generate_icon_final_images(config):
         # Change vbucks
         modified_img = add_vbucks(modified_img, config)
 
-        output_path = os.path.join("theme", "icons", img_name)
+        output_path = os.path.join("fortgrub", "icons", img_name)
         modified_img.save(output_path)
         
         
