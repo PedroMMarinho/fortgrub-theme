@@ -1,0 +1,5 @@
+__pycache__
+venv/
+fortgrub/icons/*.png
+fortgrub/cached/*.png
+scripts/jsons/entries.json

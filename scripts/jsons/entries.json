@@ -1,0 +1,65 @@
+{
+    "entries": [
+        {
+            "name": "Champion of Ash",
+            "type": "menuentry",
+            "class": [
+                "arch",
+                "gnu-linux",
+                "gnu",
+                "os"
+            ],
+            "children": []
+        },
+        {
+            "name": " Lord of Cinder",
+            "type": "menuentry",
+            "class": [
+                "windows",
+                "os"
+            ],
+            "children": []
+        },
+        {
+            "name": " Restore Ember",
+            "type": "submenu",
+            "class": [
+                "ember",
+                "options"
+            ],
+            "children": [
+                {
+                    "name": "Arch kernel Linux",
+                    "type": "menuentry",
+                    "class": [
+                        "arch",
+                        "gnu-linux",
+                        "gnu",
+                        "os"
+                    ],
+                    "children": []
+                },
+                {
+                    "name": "Arch Linux Fallback",
+                    "type": "menuentry",
+                    "class": [
+                        "arch",
+                        "gnu-linux",
+                        "gnu",
+                        "os"
+                    ],
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": " Firelink Shrine",
+            "type": "menuentry",
+            "class": [
+                "bonefire",
+                "bios"
+            ],
+            "children": []
+        }
+    ]
+}

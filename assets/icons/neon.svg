@@ -1,0 +1,18 @@
+<svg width="15" height="15" version="1.1" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0 -1037.4)">
+  <ellipse transform="translate(0 1037.4)" cx="9.5" cy="1047.9" rx="1.5" ry="2.5" style="fill:#ac9393"/>
+  <path transform="translate(0 1037.4)" d="m7.5 3a4.5 4.5 0 0 0 -4.5 4.5 4.5 4.5 0 0 0 4.5 4.5 4.5 4.5 0 0 0 4.5 -4.5 4.5 4.5 0 0 0 -4.5 -4.5zm0 1a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1 -3.5 3.5 3.5 3.5 0 0 1 -3.5 -3.5 3.5 3.5 0 0 1 3.5 -3.5z" style="fill:#1eaca4"/>
+  <circle cx="7.5" cy="1044.9" r="1.5" style="fill:#1eaca4"/>
+  <circle cx="7.5" cy="1040.9" r="1" style="fill:#1eaca4"/>
+  <circle cx="7.5" cy="1048.9" r="1" style="fill:#1eaca4"/>
+  <circle cx="7.5" cy="1038.9" r="1" style="fill:#1eaca4"/>
+  <circle cx="7.5" cy="1050.9" r="1" style="fill:#1eaca4"/>
+  <circle cx="13.5" cy="1044.9" r="1" style="fill:#1eaca4"/>
+  <circle cx="1.5" cy="1044.9" r="1" style="fill:#1eaca4"/>
+  <path d="m2.9038 1040.3a6.5 6.5 45 0 0 0 9.1924 6.5 6.5 45 0 0 9.1924 0 6.5 6.5 45 0 0 0 -9.1924 6.5 6.5 45 0 0 -9.1924 0zm0.70711 0.7071a5.5 5.5 45 0 1 7.7782 0 5.5 5.5 45 0 1 0 7.7782 5.5 5.5 45 0 1 -7.7782 0 5.5 5.5 45 0 1 0 -7.7782z" style="fill:#1eaca4"/>
+  <circle transform="rotate(-45)" cx="-733.53" cy="738.13" r="1" style="fill:#1eaca4"/>
+  <circle transform="rotate(-45)" cx="-733.53" cy="750.13" r="1" style="fill:#1eaca4"/>
+  <circle transform="rotate(-45)" cx="-727.53" cy="744.13" r="1" style="fill:#1eaca4"/>
+  <circle transform="rotate(-45)" cx="-739.53" cy="744.13" r="1" style="fill:#1eaca4"/>
+ </g>
+</svg>

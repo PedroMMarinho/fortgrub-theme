@@ -1,0 +1,12 @@
+{
+    "level": 99,
+    "xp-progress": 20,
+    "banner": {
+        "color": "Red",
+        "icon": "StandardBanner31.png"
+    },
+    "battlepass": {
+        "tier": 60,
+        "stars": 20
+    }
+}

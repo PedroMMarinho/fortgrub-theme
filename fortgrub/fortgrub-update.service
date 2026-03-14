@@ -1,0 +1,9 @@
+[Unit]
+Description=Grubsouls theme update service
+After=hibernate.target
+
+[Service]
+ExecStart=/usr/bin/python3 /boot/grub/themes/fortgrub/scripts/update_theme.py
+
+[Install]
+WantedBy=multi-user.target hibernate.target
