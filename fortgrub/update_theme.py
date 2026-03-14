@@ -2,8 +2,11 @@ import os
 import random
 import subprocess
 from PIL import Image, ImageDraw, ImageFont
+from os.path import abspath, dirname
+from pathlib import Path
+import re
 
-THEME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+THEME_DIR = Path(dirname(abspath(__file__)))
 
 BACKGROUNDS_DIR = os.path.join(THEME_DIR, "backgrounds")
 CACHED_DIR = os.path.join(THEME_DIR, "cached")
@@ -74,7 +77,7 @@ def update_theme():
         
         final_image.alpha_composite(vbucks_layer)
 
-        output_path = os.path.join("theme", "icons", img_name)
+        output_path = os.path.join(THEME_DIR, "icons", img_name)
         temp_output = output_path + ".tmp"
         
         final_image.save(temp_output, format="PNG", compress_level=1)

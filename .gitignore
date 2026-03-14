@@ -4,3 +4,4 @@ scripts/config.json
 fortgrub/icons/*.png
 fortgrub/cached/*.png
 scripts/jsons/entries.json
+fortgrub/backgrounds/*.png
