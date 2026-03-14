@@ -19,3 +19,7 @@ generate:
 update:
 	@echo "🎮 Updating Fortnite GRUB theme"
 	sudo -E PYTHONPATH=. $(PYTHON_BIN) $(MAIN_SCRIPT) update-theme
+
+map:
+	@echo "🎮 Mapping Entries Onto Grub.cfg"
+	sudo -E PYTHONPATH=. $(PYTHON_BIN) $(MAIN_SCRIPT) map-entries

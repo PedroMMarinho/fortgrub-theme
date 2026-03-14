@@ -29,7 +29,7 @@ def run():
     config["vbucks"] = vbucks
     config["background"] = background
     config["progress-bar-emoticon"] = progress_bar_emoticon
-    config["season"] = 3
+    config["season"] = "3"
     
     config["missions"] = {
         "battlepass" : {
