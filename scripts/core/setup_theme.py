@@ -33,7 +33,7 @@ def run():
     
     config["missions"] = {
         "battlepass" : {
-            "description": "I Use Arch btw ...",
+            "description": "I Use Arch btw!",
             "current-stars": 1,
             "total-stars": 1,
             "star-reward": 10,
