@@ -55,7 +55,7 @@ After that you can:
   - I advise doing this manually, but you can also run `make map` to insert the classes for you.
 
 
-For more info about custom entries checkout "wiki link TODO"
+For more info about custom entries checkout [FAQ](https://github.com/PedroMMarinho/fortgrub-theme/wiki/FAQ)
 
 - And that's it. You are good to go.
 
