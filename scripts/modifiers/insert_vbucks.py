@@ -87,7 +87,7 @@ def create_vbuck_container(package_number, base_image):
 
 
 def add_vbucks(base_image, config):
-    package_number = get_package_count()
+    package_number = config.get("vbucks", 0)
 
     current_image = create_vbuck_container(package_number, base_image)
 

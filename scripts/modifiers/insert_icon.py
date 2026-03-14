@@ -22,44 +22,49 @@ def get_icon_for_classes(classes, size):
     if not classes: return None
     class_list = classes if isinstance(classes, list) else [classes]
     target_w, target_h = size
+    
+    valid_extensions = ['.svg', '.png', '.jpg', '.jpeg']
 
     for cls in class_list:
-        svg_path = os.path.join(ICONS_DIR, f"{cls}.svg")
-        if os.path.exists(svg_path):
-            try:
-                # To improve quality, we render at a higher resolution and then downscale.
-                oversample_factor = 4
-                render_w = target_w * oversample_factor
-                render_h = target_h * oversample_factor
-                
-                png_data = cairosvg.svg2png(url=svg_path, output_width=render_w, output_height=render_h)
-                
-                raw_icon = Image.open(io.BytesIO(png_data)).convert("RGBA")
-                
-                bbox = raw_icon.getbbox()
-                
-                if bbox:
-                    trimmed_icon = raw_icon.crop(bbox)
+        for ext in valid_extensions:
+            file_path = os.path.join(ICONS_DIR, f"{cls}{ext}")
+            
+            if os.path.exists(file_path):
+                try:
+                    if ext == '.svg':
+                        oversample_factor = 4
+                        render_w = target_w * oversample_factor
+                        render_h = target_h * oversample_factor
+                        
+                        png_data = cairosvg.svg2png(url=file_path, output_width=render_w, output_height=render_h)
+                        raw_icon = Image.open(io.BytesIO(png_data)).convert("RGBA")
+                    else:
+                        raw_icon = Image.open(file_path).convert("RGBA")
                     
-                    final_icon = ImageOps.contain(
-                        trimmed_icon, 
-                        (target_w, target_h), 
-                        method=Image.Resampling.LANCZOS
-                    )
+                    bbox = raw_icon.getbbox()
                     
-                    canvas = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
-                    offset_x = (target_w - final_icon.width) // 2
-                    offset_y = (target_h - final_icon.height) // 2
-                    canvas.paste(final_icon, (offset_x, offset_y))
+                    if bbox:
+                        trimmed_icon = raw_icon.crop(bbox)
+                        
+                        final_icon = ImageOps.contain(
+                            trimmed_icon, 
+                            (target_w, target_h), 
+                            method=Image.Resampling.LANCZOS
+                        )
+                        
+                        canvas = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+                        offset_x = (target_w - final_icon.width) // 2
+                        offset_y = (target_h - final_icon.height) // 2
+                        canvas.paste(final_icon, (offset_x, offset_y))
+                        
+                        return canvas
                     
-                    return canvas
-                
-                return raw_icon.resize((target_w, target_h), Image.Resampling.LANCZOS)
+                    return raw_icon.resize((target_w, target_h), Image.Resampling.LANCZOS)
 
-            except Exception as e:
-                print(f"❌ Error converting {cls}.svg: {e}")
+                except Exception as e:
+                    print(f"❌ Error converting {file_path}: {e}")
+                    continue
 
-    # Throw error if no icon found for any class
     raise ValueError(f"No icon found for classes {class_list}")
 
 def render_menu_level(entries, base_image, arrow_icon, menu_id="root", global_counter=None, config=None):

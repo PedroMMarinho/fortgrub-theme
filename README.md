@@ -11,7 +11,10 @@ A GRUB theme inspired by Fortnite.
 
 # Installation
 
+<a><img src="preview/fortnite-guy.png" width="30%" height="30%" title="🙂" align="right"></a>
+
 - Clone or download the theme repository:
+
 
 ```bash
 git clone https://github.com/PedroMMarinho/fortgrub-theme.git
